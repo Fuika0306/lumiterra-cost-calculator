@@ -514,6 +514,159 @@
             transform: scale(1.2);
         }
 
+        .calculator-section {
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-top: 2px solid #dee2e6;
+        }
+
+        .calculator-section h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .calculator-form {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .calculator-tip {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #667eea;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+        }
+
+        .calculator-tip span {
+            margin: 0 10px;
+        }
+
+        .calculator-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .calculator-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculator-result {
+            margin-top: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            display: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .calculator-result.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .result-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-item:last-child {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .result-value {
+            color: #333;
+            font-weight: 700;
+            font-size: 1.3em;
+            color: #667eea;
+        }
+
+        .result-item:last-child .result-value {
+            color: #28a745;
+            font-size: 1.5em;
+        }
+
         .links-section {
             padding: 30px;
             background: #f8f9fa;
@@ -625,6 +778,24 @@
             .link-icon {
                 margin: 0 auto;
             }
+
+            .calculator-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-group {
+                min-width: 100%;
+            }
+
+            .calculator-btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .calculator-result.active {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -653,13 +824,19 @@
 
         <div class="tabs-container">
             <button class="tab-button active" onclick="switchTab(0)" id="tabCost">💰 裝備成本計算</button>
-            <button class="tab-button" onclick="switchTab(1)" id="tabReward">🎯 任務收益表</button>
-            <button class="tab-button" onclick="switchTab(2)" id="tabMap">🗺️ 地圖位置</button>
+            <button class="tab-button" onclick="switchTab(1)" id="tabEssence">✨ 精華計算</button>
+            <button class="tab-button" onclick="switchTab(2)" id="tabReward">🎯 任務收益表</button>
+            <button class="tab-button" onclick="switchTab(3)" id="tabMap">🗺️ 地圖位置</button>
         </div>
 
         <!-- 第一頁：裝備成本計算 -->
         <div class="page-content active" id="page1">
             <div class="table-container">
+                <div class="calculator-tip" id="calculatorTip" style="margin-bottom: 20px;">
+                    <span id="tipCombat">⚔️ 戰鬥:5+1</span>
+                    <span id="tipGathering">🌿 採集:5+3</span>
+                    <span id="tipLivestock">🐄 畜牧:5+3</span>
+                </div>
                 <div id="loading" class="loading" style="display: none;">
                     <div class="spinner"></div>
                     <p id="loadingText">正在載入價格數據...</p>
@@ -679,59 +856,146 @@
                 </table>
             </div>
 
+            <div class="calculator-section">
+                <h3 id="calculatorTitle">🧮 自訂裝備成本計算器</h3>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="startLevel" id="labelStartLevel">起始等級：</label>
+                            <input type="number" id="startLevel" min="0" max="8" value="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="endLevel" id="labelEndLevel">目標等級：</label>
+                            <input type="number" id="endLevel" min="0" max="8" value="1" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="equipmentCount" id="labelEquipmentCount">裝備數量：</label>
+                            <input type="number" id="equipmentCount" min="1" max="22" value="1" placeholder="1">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateCustomCost()" id="calcBtn">計算成本</button>
+                    </div>
+                    <div class="calculator-result" id="calculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="resultLabel1">單件成本 (遊戲幣)：</span>
+                            <span class="result-value" id="resultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="resultLabel2">總成本 (遊戲幣)：</span>
+                            <span class="result-value" id="resultValue2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="resultLabel3">所需 MON：</span>
+                            <span class="result-value" id="resultValue3">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="resultLabel4">USD 成本：</span>
+                            <span class="result-value" id="resultValue4">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="links-section">
                 <h3 id="linksTitle">🔗 相關連結</h3>
                 <div class="links-grid">
                     <div class="link-item">
                         <div class="link-icon">📖</div>
                         <div class="link-content">
-                            <div class="link-title">Lumiterra 中文游戏教程</div>
+                            <div class="link-title" id="linkTitle1">Lumiterra 中文游戏教程</div>
                             <a href="https://flowery-mouth-c2e.notion.site/lumiterra-guide-chinese" target="_blank" class="link-url">https://flowery-mouth-c2e.notion.site/lumiterra-guide-chinese</a>
                         </div>
                     </div>
                     <div class="link-item">
                         <div class="link-icon">🌐</div>
                         <div class="link-content">
-                            <div class="link-title">游戏网页版</div>
+                            <div class="link-title" id="linkTitle2">游戏网页版</div>
                             <a href="https://mainnet.lumiterra.net/" target="_blank" class="link-url">https://mainnet.lumiterra.net/</a>
                         </div>
                     </div>
                     <div class="link-item">
                         <div class="link-icon">💻</div>
                         <div class="link-content">
-                            <div class="link-title">游戏PC安装包下载</div>
+                            <div class="link-title" id="linkTitle3">游戏PC安装包下载</div>
                             <a href="https://lumiterra.net/" target="_blank" class="link-url">https://lumiterra.net/</a>
-                            <div class="link-note">iOS: Search for "Lumiterra" in the Apple Store</div>
+                            <div class="link-note" id="linkNote1">iOS: Search for "Lumiterra" in the Apple Store</div>
                         </div>
                     </div>
                     <div class="link-item">
                         <div class="link-icon">💰</div>
                         <div class="link-content">
-                            <div class="link-title">游戏充值$Mon（LVMON）代币买精力药水</div>
+                            <div class="link-title" id="linkTitle4">游戏充值$Mon（LVMON）代币买精力药水</div>
                             <a href="https://monad.lumiterra.net/deposit" target="_blank" class="link-url">https://monad.lumiterra.net/deposit</a>
                         </div>
                     </div>
                     <div class="link-item">
                         <div class="link-icon">🛒</div>
                         <div class="link-content">
-                            <div class="link-title">游戏市场</div>
+                            <div class="link-title" id="linkTitle5">游戏市场</div>
                             <a href="https://monad.lumiterra.net/marketplace" target="_blank" class="link-url">https://monad.lumiterra.net/marketplace</a>
                         </div>
                     </div>
                     <div class="link-item">
                         <div class="link-icon">🎁</div>
                         <div class="link-content">
-                            <div class="link-title">邀请好友输入自己的邀请码获得奖励</div>
+                            <div class="link-title" id="linkTitle6">邀请好友输入自己的邀请码获得奖励</div>
                             <a href="https://gmonad.lumiterra.net/lumonad?code=LUMI5FEB156" target="_blank" class="link-url">https://gmonad.lumiterra.net/lumonad?code=LUMI5FEB156</a>
-                            <div class="link-note">新手礼包已经自动发到游戏内</div>
+                            <div class="link-note" id="linkNote2">新手礼包已经自动发到游戏内</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 第二頁：任務收益表 -->
+        <!-- 第二頁：精華計算 -->
         <div class="page-content" id="page2">
+            <div class="table-container">
+                <table id="essenceTable">
+                    <thead>
+                        <tr>
+                            <th id="thEssenceLevel">等級</th>
+                            <th id="thEssenceMonCost">MON成本</th>
+                            <th id="thEssenceFee">費用</th>
+                        </tr>
+                    </thead>
+                    <tbody id="essenceTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="calculator-section">
+                <h3 id="essenceCalculatorTitle">🧮 自訂精華成本計算器</h3>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="essenceEndLevel" id="labelEssenceEndLevel">目標等級：</label>
+                            <input type="number" id="essenceEndLevel" min="1" max="9" value="1" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="essenceCount" id="labelEssenceCount">數量：</label>
+                            <input type="number" id="essenceCount" min="1" value="1" placeholder="1">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateEssenceCost()" id="essenceCalcBtn">計算成本</button>
+                    </div>
+                    <div class="calculator-result" id="essenceCalculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="essenceResultLabel1">單件成本 (MON)：</span>
+                            <span class="result-value" id="essenceResultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="essenceResultLabel2">總成本 (MON)：</span>
+                            <span class="result-value" id="essenceResultValue2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="essenceResultLabel3">USD 成本：</span>
+                            <span class="result-value" id="essenceResultValue3">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三頁：任務收益表 -->
+        <div class="page-content" id="page3">
             <div class="reward-section">
                 <h3 id="rewardTitle">🎯 單次任務收益表 (Single Token Task Reward)</h3>
                 <div class="reward-table-container">
@@ -785,8 +1049,8 @@
             </div>
         </div>
 
-        <!-- 第三頁：地圖位置 -->
-        <div class="page-content" id="page3">
+        <!-- 第四頁：地圖位置 -->
+        <div class="page-content" id="page4">
             <div class="map-section">
                 <h3 id="mapTitle">🗺️ 地圖位置 (Locations)</h3>
                 <div class="map-container">
@@ -825,21 +1089,67 @@
                 statusManual: '已手動設定價格',
                 loadingText: '正在載入價格數據...',
                 tabCost: '💰 裝備成本計算',
+                tabEssence: '✨ 精華計算',
                 tabReward: '🎯 任務收益表',
                 tabMap: '🗺️ 地圖位置',
                 thLevel: '等級',
                 thSingleCost: '單件成本 (遊戲幣)',
                 thTotalCost: '總成本 (遊戲幣)',
                 thMonNeeded: '所需 MON',
+                thEssenceLevel: '等級',
+                thEssenceMonCost: 'MON成本',
+                thEssenceFee: '費用',
                 thAbilityLevel: '能力等級',
                 thRewardRange: '$LVMON 獎勵範圍',
                 linksTitle: '🔗 相關連結',
                 rewardTitle: '🎯 單次任務收益表 (Single Token Task Reward)',
                 mapTitle: '🗺️ 地圖位置 (Locations)',
                 mapHint: '點擊圖片可放大查看',
+                calculatorTitle: '🧮 自訂裝備成本計算器',
+                essenceCalculatorTitle: '🧮 自訂精華成本計算器',
+                labelStartLevel: '起始等級：',
+                labelEndLevel: '目標等級：',
+                labelEquipmentCount: '裝備數量：',
+                labelEssenceEndLevel: '目標等級：',
+                labelEssenceCount: '數量：',
+                calcBtn: '計算成本',
+                essenceCalcBtn: '計算成本',
+                essenceResultLabel1: '單件成本 (MON)：',
+                essenceResultLabel2: '總成本 (MON)：',
+                essenceResultLabel3: 'USD 成本：',
+                resultLabel1: '單件成本 (遊戲幣)：',
+                resultLabel2: '總成本 (遊戲幣)：',
+                resultLabel3: '所需 MON：',
+                resultLabel4: 'USD 成本：',
                 getPriceFirst: '請先獲取 Monad 價格',
                 total: '總計',
-                level: '等級'
+                level: '等級',
+                errorTitle: '錯誤：',
+                errorNotFound: '無法找到 Monad 代幣價格。請確認代幣 ID 或手動輸入價格。',
+                errorNetwork: '請檢查網路連接或稍後再試。',
+                errorManualInput: '您也可以手動輸入價格：',
+                manualPricePlaceholder: '輸入 MON 價格 (USD)',
+                manualPriceSet: '設定',
+                alertValidPrice: '請輸入有效的價格',
+                alertLevelRange08: '等級範圍為 0-8',
+                alertLevelRange19: '等級範圍為 1-9',
+                alertTargetGreater: '目標等級必須大於起始等級',
+                alertEquipmentRange: '裝備數量範圍為 1-22',
+                alertCountGreater: '數量必須大於 0',
+                levelPrefix: '',
+                essenceLevelPrefix: '第',
+                essenceLevelSuffix: '級',
+                tipCombat: '⚔️ 戰鬥:5+1',
+                tipGathering: '🌿 採集:5+3',
+                tipLivestock: '🐄 畜牧:5+3',
+                linkTitle1: 'Lumiterra 中文游戏教程',
+                linkTitle2: '游戏网页版',
+                linkTitle3: '游戏PC安装包下载',
+                linkTitle4: '游戏充值$Mon（LVMON）代币买精力药水',
+                linkTitle5: '游戏市场',
+                linkTitle6: '邀请好友输入自己的邀请码获得奖励',
+                linkNote1: 'iOS: 在 Apple Store 搜索 "Lumiterra"',
+                linkNote2: '新手礼包已经自动发到游戏内'
             },
             en: {
                 pageTitle: '⚔️ Lumiterra Equipment Cost Calculator',
@@ -852,21 +1162,67 @@
                 statusManual: 'Price set manually',
                 loadingText: 'Loading price data...',
                 tabCost: '💰 Equipment Cost',
+                tabEssence: '✨ Essence Cost',
                 tabReward: '🎯 Task Reward',
                 tabMap: '🗺️ Locations',
                 thLevel: 'Level',
                 thSingleCost: 'Single Cost (Game Currency)',
                 thTotalCost: 'Total Cost (Game Currency)',
                 thMonNeeded: 'MON Required',
+                thEssenceLevel: 'Level',
+                thEssenceMonCost: 'MON Cost',
+                thEssenceFee: 'Fee',
                 thAbilityLevel: 'Ability Level',
                 thRewardRange: '$LVMON Reward Range',
                 linksTitle: '🔗 Related Links',
                 rewardTitle: '🎯 Single Token Task Reward',
                 mapTitle: '🗺️ Locations Map',
                 mapHint: 'Click image to zoom in',
+                calculatorTitle: '🧮 Custom Equipment Cost Calculator',
+                essenceCalculatorTitle: '🧮 Custom Essence Cost Calculator',
+                labelStartLevel: 'Start Level:',
+                labelEndLevel: 'Target Level:',
+                labelEquipmentCount: 'Equipment Count:',
+                labelEssenceEndLevel: 'Target Level:',
+                labelEssenceCount: 'Count:',
+                calcBtn: 'Calculate Cost',
+                essenceCalcBtn: 'Calculate Cost',
+                essenceResultLabel1: 'Single Cost (MON):',
+                essenceResultLabel2: 'Total Cost (MON):',
+                essenceResultLabel3: 'USD Cost:',
+                resultLabel1: 'Single Cost (Game Currency):',
+                resultLabel2: 'Total Cost (Game Currency):',
+                resultLabel3: 'MON Required:',
+                resultLabel4: 'USD Cost:',
                 getPriceFirst: 'Please fetch Monad price first',
                 total: 'Total',
-                level: 'Level'
+                level: 'Level',
+                errorTitle: 'Error: ',
+                errorNotFound: 'Unable to find Monad token price. Please confirm the token ID or enter the price manually.',
+                errorNetwork: 'Please check your network connection or try again later.',
+                errorManualInput: 'You can also enter the price manually:',
+                manualPricePlaceholder: 'Enter MON price (USD)',
+                manualPriceSet: 'Set',
+                alertValidPrice: 'Please enter a valid price',
+                alertLevelRange08: 'Level range is 0-8',
+                alertLevelRange19: 'Level range is 1-9',
+                alertTargetGreater: 'Target level must be greater than start level',
+                alertEquipmentRange: 'Equipment count range is 1-22',
+                alertCountGreater: 'Count must be greater than 0',
+                levelPrefix: 'Level',
+                essenceLevelPrefix: 'Level ',
+                essenceLevelSuffix: '',
+                tipCombat: '⚔️ Combat:5+1',
+                tipGathering: '🌿 Gathering:5+3',
+                tipLivestock: '🐄 Livestock:5+3',
+                linkTitle1: 'Lumiterra Chinese Game Guide',
+                linkTitle2: 'Game Web Version',
+                linkTitle3: 'Game PC Installation Package Download',
+                linkTitle4: 'Game Recharge $Mon (LVMON) Token to Buy Energy Potions',
+                linkTitle5: 'Game Marketplace',
+                linkTitle6: 'Invite Friends to Enter Your Invite Code for Rewards',
+                linkNote1: 'iOS: Search for "Lumiterra" in the Apple Store',
+                linkNote2: 'Newcomer gift pack has been automatically sent to the game'
             }
         };
 
@@ -893,18 +1249,52 @@
             if (document.getElementById('refreshBtn')) document.getElementById('refreshBtn').textContent = t.refreshBtn;
             if (document.getElementById('loadingText')) document.getElementById('loadingText').textContent = t.loadingText;
             if (document.getElementById('tabCost')) document.getElementById('tabCost').textContent = t.tabCost;
+            if (document.getElementById('tabEssence')) document.getElementById('tabEssence').textContent = t.tabEssence;
             if (document.getElementById('tabReward')) document.getElementById('tabReward').textContent = t.tabReward;
             if (document.getElementById('tabMap')) document.getElementById('tabMap').textContent = t.tabMap;
             if (document.getElementById('thLevel')) document.getElementById('thLevel').textContent = t.thLevel;
+            if (document.getElementById('thEssenceLevel')) document.getElementById('thEssenceLevel').textContent = t.thEssenceLevel;
+            if (document.getElementById('thEssenceMonCost')) document.getElementById('thEssenceMonCost').textContent = t.thEssenceMonCost;
+            if (document.getElementById('thEssenceFee')) document.getElementById('thEssenceFee').textContent = t.thEssenceFee;
             if (document.getElementById('thSingleCost')) document.getElementById('thSingleCost').textContent = t.thSingleCost;
             if (document.getElementById('thTotalCost')) document.getElementById('thTotalCost').textContent = t.thTotalCost;
             if (document.getElementById('thMonNeeded')) document.getElementById('thMonNeeded').textContent = t.thMonNeeded;
+            if (document.getElementById('thEssenceLevel')) document.getElementById('thEssenceLevel').textContent = t.thEssenceLevel;
+            if (document.getElementById('thEssenceMonCost')) document.getElementById('thEssenceMonCost').textContent = t.thEssenceMonCost;
+            if (document.getElementById('thEssenceFee')) document.getElementById('thEssenceFee').textContent = t.thEssenceFee;
             if (document.getElementById('thAbilityLevel')) document.getElementById('thAbilityLevel').textContent = t.thAbilityLevel;
             if (document.getElementById('thRewardRange')) document.getElementById('thRewardRange').textContent = t.thRewardRange;
             if (document.getElementById('linksTitle')) document.getElementById('linksTitle').textContent = t.linksTitle;
             if (document.getElementById('rewardTitle')) document.getElementById('rewardTitle').textContent = t.rewardTitle;
             if (document.getElementById('mapTitle')) document.getElementById('mapTitle').textContent = t.mapTitle;
             if (document.getElementById('mapHint')) document.getElementById('mapHint').textContent = t.mapHint;
+            if (document.getElementById('calculatorTitle')) document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
+            if (document.getElementById('essenceCalculatorTitle')) document.getElementById('essenceCalculatorTitle').textContent = t.essenceCalculatorTitle;
+            if (document.getElementById('labelStartLevel')) document.getElementById('labelStartLevel').textContent = t.labelStartLevel;
+            if (document.getElementById('labelEndLevel')) document.getElementById('labelEndLevel').textContent = t.labelEndLevel;
+            if (document.getElementById('labelEquipmentCount')) document.getElementById('labelEquipmentCount').textContent = t.labelEquipmentCount;
+            if (document.getElementById('labelEssenceEndLevel')) document.getElementById('labelEssenceEndLevel').textContent = t.labelEssenceEndLevel;
+            if (document.getElementById('labelEssenceCount')) document.getElementById('labelEssenceCount').textContent = t.labelEssenceCount;
+            if (document.getElementById('calcBtn')) document.getElementById('calcBtn').textContent = t.calcBtn;
+            if (document.getElementById('essenceCalcBtn')) document.getElementById('essenceCalcBtn').textContent = t.essenceCalcBtn;
+            if (document.getElementById('resultLabel1')) document.getElementById('resultLabel1').textContent = t.resultLabel1;
+            if (document.getElementById('resultLabel2')) document.getElementById('resultLabel2').textContent = t.resultLabel2;
+            if (document.getElementById('resultLabel3')) document.getElementById('resultLabel3').textContent = t.resultLabel3;
+            if (document.getElementById('resultLabel4')) document.getElementById('resultLabel4').textContent = t.resultLabel4;
+            if (document.getElementById('essenceResultLabel1')) document.getElementById('essenceResultLabel1').textContent = t.essenceResultLabel1;
+            if (document.getElementById('essenceResultLabel2')) document.getElementById('essenceResultLabel2').textContent = t.essenceResultLabel2;
+            if (document.getElementById('essenceResultLabel3')) document.getElementById('essenceResultLabel3').textContent = t.essenceResultLabel3;
+            if (document.getElementById('tipCombat')) document.getElementById('tipCombat').textContent = t.tipCombat;
+            if (document.getElementById('tipGathering')) document.getElementById('tipGathering').textContent = t.tipGathering;
+            if (document.getElementById('tipLivestock')) document.getElementById('tipLivestock').textContent = t.tipLivestock;
+            if (document.getElementById('linkTitle1')) document.getElementById('linkTitle1').textContent = t.linkTitle1;
+            if (document.getElementById('linkTitle2')) document.getElementById('linkTitle2').textContent = t.linkTitle2;
+            if (document.getElementById('linkTitle3')) document.getElementById('linkTitle3').textContent = t.linkTitle3;
+            if (document.getElementById('linkTitle4')) document.getElementById('linkTitle4').textContent = t.linkTitle4;
+            if (document.getElementById('linkTitle5')) document.getElementById('linkTitle5').textContent = t.linkTitle5;
+            if (document.getElementById('linkTitle6')) document.getElementById('linkTitle6').textContent = t.linkTitle6;
+            if (document.getElementById('linkNote1')) document.getElementById('linkNote1').textContent = t.linkNote1;
+            if (document.getElementById('linkNote2')) document.getElementById('linkNote2').textContent = t.linkNote2;
             
             // 更新狀態
             if (document.getElementById('status') && document.getElementById('status').textContent === translations['zh'].statusReady) {
@@ -914,6 +1304,7 @@
             // 重新生成表格
             if (monadPrice > 0) {
                 updateTable();
+                updateEssenceTable();
             }
         }
 
@@ -965,6 +1356,9 @@
         // 裝備等級成本（遊戲幣）- 每件裝備的成本
         const levelCosts = [300, 1200, 3000, 6600, 13800, 28200, 57000, 114600, 229800];
         const totalEquipment = 22; // 每個等級有 22 件裝備
+
+        // 精華等級成本（MON）
+        const essenceCosts = [150, 450, 1054, 2262, 4678, 9510, 19174, 38502, 77158];
 
         let monadPrice = 0;
         let priceData = null;
@@ -1025,7 +1419,7 @@
 
                 if (!data || !data.usd) {
                     // 如果找不到，使用預設價格或提示用戶
-                    throw new Error('無法找到 Monad 代幣價格。請確認代幣 ID 或手動輸入價格。');
+                    throw new Error(translations[currentLang].errorNotFound);
                 }
 
                 monadPrice = data.usd;
@@ -1042,6 +1436,7 @@
                 
                 // 更新表格
                 updateTable();
+                updateEssenceTable();
 
             } catch (error) {
                 console.error('獲取價格失敗:', error);
@@ -1062,9 +1457,10 @@
                 document.getElementById('monadPrice').textContent = formatPrice(monadPrice);
                 document.getElementById('error').style.display = 'none';
                 updateTable();
+                updateEssenceTable();
                 updateStatus(translations[currentLang].statusManual);
             } else {
-                alert(currentLang === 'zh' ? '請輸入有效的價格' : 'Please enter a valid price');
+                alert(translations[currentLang].alertValidPrice);
             }
         }
 
@@ -1113,6 +1509,127 @@
                 <td style="font-weight: 700; font-size: 1.1em; color: #28a745;">${formatNumber(totalMonNeeded)} MON (${formatPrice(totalUsdCost)})</td>
             `;
             tableBody.appendChild(totalRow);
+        }
+
+        // 更新精華表格
+        function updateEssenceTable() {
+            const tableBody = document.getElementById('essenceTableBody');
+            
+            if (monadPrice === 0) {
+                tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 40px; color: #999;">${translations[currentLang].getPriceFirst}</td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = '';
+            let totalMonCost = 0;
+            let totalUsdCost = 0;
+
+            // 生成每個等級的行
+            essenceCosts.forEach((monCost, index) => {
+                const row = document.createElement('tr');
+                const level = index + 1; // 第1級到第9級
+                const usdCost = monCost * monadPrice;
+
+                totalMonCost += monCost;
+                totalUsdCost += usdCost;
+
+                row.innerHTML = `
+                    <td style="font-weight: 600; font-size: 1.1em;">${translations[currentLang].essenceLevelPrefix}${level}${translations[currentLang].essenceLevelSuffix}</td>
+                    <td style="font-weight: 600;">${formatNumber(monCost)}</td>
+                    <td style="font-weight: 600; color: #28a745;">${formatPrice(usdCost)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            // 添加總計行
+            const totalRow = document.createElement('tr');
+            totalRow.className = 'total-row';
+            totalRow.innerHTML = `
+                <td style="font-weight: 700; font-size: 1.2em;">${translations[currentLang].total}</td>
+                <td style="font-weight: 700; font-size: 1.1em;">${formatNumber(totalMonCost)}</td>
+                <td style="font-weight: 700; font-size: 1.1em; color: #28a745;">${formatPrice(totalUsdCost)}</td>
+            `;
+            tableBody.appendChild(totalRow);
+        }
+
+        // 自訂成本計算函數
+        function calculateCustomCost() {
+            const startLevel = parseInt(document.getElementById('startLevel').value) || 0;
+            const endLevel = parseInt(document.getElementById('endLevel').value) || 1;
+            const equipmentCount = parseInt(document.getElementById('equipmentCount').value) || 1;
+            const resultDiv = document.getElementById('calculatorResult');
+
+            // 驗證輸入
+            if (startLevel < 0 || startLevel > 8 || endLevel < 0 || endLevel > 8) {
+                alert(translations[currentLang].alertLevelRange08);
+                return;
+            }
+
+            if (startLevel >= endLevel) {
+                alert(translations[currentLang].alertTargetGreater);
+                return;
+            }
+
+            if (equipmentCount < 1 || equipmentCount > 22) {
+                alert(translations[currentLang].alertEquipmentRange);
+                return;
+            }
+
+            // 計算從起始等級到目標等級的總成本
+            let totalCost = 0;
+            for (let level = startLevel; level < endLevel; level++) {
+                totalCost += levelCosts[level];
+            }
+
+            // 單件成本（從起始等級升級到目標等級）
+            const singleCost = totalCost;
+            // 總成本（乘以裝備數量）
+            const totalGameCost = singleCost * equipmentCount;
+            // 所需 MON（等於總成本）
+            const monNeeded = totalGameCost;
+            // USD 成本
+            const usdCost = monNeeded * monadPrice;
+
+            // 顯示結果
+            document.getElementById('resultValue1').textContent = formatNumber(singleCost);
+            document.getElementById('resultValue2').textContent = formatNumber(totalGameCost);
+            document.getElementById('resultValue3').textContent = formatNumber(monNeeded) + ' MON';
+            document.getElementById('resultValue4').textContent = formatPrice(usdCost);
+
+            resultDiv.classList.add('active');
+        }
+
+        // 自訂精華成本計算函數
+        function calculateEssenceCost() {
+            const endLevel = parseInt(document.getElementById('essenceEndLevel').value) || 1;
+            const count = parseInt(document.getElementById('essenceCount').value) || 1;
+            const resultDiv = document.getElementById('essenceCalculatorResult');
+
+            // 驗證輸入
+            if (endLevel < 1 || endLevel > 9) {
+                alert(translations[currentLang].alertLevelRange19);
+                return;
+            }
+
+            if (count < 1) {
+                alert(translations[currentLang].alertCountGreater);
+                return;
+            }
+
+            // 使用表格中該等級的單一成本（不累加）
+            const singleMonCost = essenceCosts[endLevel - 1]; // 第1級對應索引0，第7級對應索引6
+
+            // 總成本 = 單件成本 × 數量
+            const totalMonCost = singleMonCost * count;
+            // USD 成本
+            const usdCost = totalMonCost * monadPrice;
+
+            // 顯示結果
+            document.getElementById('essenceResultValue1').textContent = formatNumber(singleMonCost) + ' MON';
+            document.getElementById('essenceResultValue2').textContent = formatNumber(totalMonCost) + ' MON';
+            document.getElementById('essenceResultValue3').textContent = formatPrice(usdCost);
+
+            resultDiv.classList.add('active');
         }
 
         // 初始化

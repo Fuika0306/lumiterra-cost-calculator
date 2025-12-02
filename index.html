@@ -3,8 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lumiterra 裝備成本計算器 - 計算遊戲裝備升級成本、精華成本、任務收益，支援中英文切換">
+    <meta name="keywords" content="Lumiterra, 裝備計算器, 遊戲成本, Monad, MON, 精華計算, 任務收益">
+    <meta name="author" content="Lumiterra">
+    <meta property="og:title" content="Lumiterra 裝備成本計算器">
+    <meta property="og:description" content="計算 Lumiterra 遊戲裝備升級成本、精華成本和任務收益">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://flowery-mouth-c2e.notion.site/image/attachment%3A15e99618-5305-46e7-8796-ecc0ce65c53d%3AGsGmCw6b0AASz4t.jpeg?table=block&id=2b2542ba-40f2-8175-9787-d84fef775b33&spaceId=f913eeae-167b-40cd-a496-6cc65fb75779&width=2000&userId=&cache=v2">
     <title>Lumiterra 裝備成本計算器</title>
     <style>
+        :root {
+            --bg-primary: rgba(255, 255, 255, 0.95);
+            --bg-secondary: #f8f9fa;
+            --bg-overlay: rgba(255, 255, 255, 0.7);
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --header-overlay: rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: rgba(30, 30, 30, 0.95);
+            --bg-secondary: #2d2d2d;
+            --bg-overlay: rgba(0, 0, 0, 0.7);
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-color: #444;
+            --shadow: rgba(0, 0, 0, 0.6);
+            --header-overlay: rgba(0, 0, 0, 0.6);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -22,6 +51,8 @@
             min-height: 100vh;
             padding: 20px;
             position: relative;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
         }
 
         body::before {
@@ -31,18 +62,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--bg-overlay);
             z-index: -1;
+            transition: background 0.3s ease;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--bg-primary);
             backdrop-filter: blur(10px);
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px var(--shadow);
             overflow: hidden;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .header {
@@ -64,8 +97,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--header-overlay);
             z-index: 0;
+            transition: background 0.3s ease;
         }
 
         .header h1 {
@@ -88,14 +122,15 @@
         }
 
         .price-info {
-            background: #f8f9fa;
+            background: var(--bg-secondary);
             padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            border-bottom: 2px solid #dee2e6;
+            border-bottom: 2px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .monad-price {
@@ -187,8 +222,10 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            background: var(--bg-primary);
             font-size: 14px;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         thead {
@@ -208,20 +245,22 @@
         td {
             padding: 12px 15px;
             text-align: center;
-            border: 1px solid #e9ecef;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: border-color 0.3s ease, color 0.3s ease;
         }
 
         tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: var(--bg-secondary);
         }
 
         tbody tr:hover {
-            background-color: #e9ecef;
+            background-color: var(--bg-overlay);
         }
 
 
         .total-row {
-            background: #f0f0f0 !important;
+            background: var(--bg-secondary) !important;
             font-weight: 600;
         }
 
@@ -233,7 +272,8 @@
         .loading {
             text-align: center;
             padding: 40px;
-            color: #666;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
 
         .spinner {
@@ -258,6 +298,108 @@
             border-radius: 8px;
             margin: 20px 30px;
             border-left: 4px solid #dc3545;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-overlay);
+            transform: translateY(-2px);
+        }
+
+        .history-section {
+            padding: 30px;
+        }
+
+        .history-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .history-item:hover {
+            background: var(--bg-overlay);
+            transform: translateX(5px);
+        }
+
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .history-item-content {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .clear-history-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .clear-history-btn:hover {
+            background: #c82333;
+        }
+
+        .help-section {
+            padding: 30px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .help-section h3 {
+            color: var(--text-primary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .help-section p, .help-section li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .help-section ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .help-section code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
         }
 
         .reward-section {
@@ -815,6 +957,10 @@
             </div>
             <div class="status-lang-container">
                 <div class="status" id="status">準備就緒</div>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+                    <span id="themeIcon">🌙</span>
+                    <span id="themeText">暗黑模式</span>
+                </button>
                 <div class="lang-switcher">
                     <button class="lang-btn active" onclick="switchLanguage('zh')" id="langZh">中文</button>
                     <button class="lang-btn" onclick="switchLanguage('en')" id="langEn">English</button>
@@ -827,6 +973,8 @@
             <button class="tab-button" onclick="switchTab(1)" id="tabEssence">✨ 精華計算</button>
             <button class="tab-button" onclick="switchTab(2)" id="tabReward">🎯 任務收益表</button>
             <button class="tab-button" onclick="switchTab(3)" id="tabMap">🗺️ 地圖位置</button>
+            <button class="tab-button" onclick="switchTab(4)" id="tabHistory">📊 計算歷史</button>
+            <button class="tab-button" onclick="switchTab(5)" id="tabHelp">❓ 使用說明</button>
         </div>
 
         <!-- 第一頁：裝備成本計算 -->
@@ -1064,6 +1212,66 @@
             </div>
         </div>
 
+        <!-- 第五頁：計算歷史 -->
+        <div class="page-content" id="page5">
+            <div class="history-section">
+                <h3 id="historyTitle">📊 計算歷史</h3>
+                <p id="historyDescription" style="color: var(--text-secondary); margin-bottom: 20px;">查看您最近的計算記錄</p>
+                <button class="clear-history-btn" onclick="clearHistory()" id="clearHistoryBtn">清除歷史記錄</button>
+                <div class="history-list" id="historyList">
+                    <p style="text-align: center; color: var(--text-secondary); padding: 40px;" id="noHistoryText">暫無計算記錄</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第六頁：使用說明 -->
+        <div class="page-content" id="page6">
+            <div class="help-section">
+                <h2 id="helpMainTitle">❓ 使用說明</h2>
+                
+                <h3 id="helpTitle1">💰 裝備成本計算</h3>
+                <p id="helpText1">此功能可以計算 Lumiterra 遊戲中裝備升級所需的成本。表格顯示從等級 0 到 9 的升級成本，包括單件成本和總成本（22 件裝備）。</p>
+                <ul>
+                    <li id="helpList1_1">單件成本：升級單件裝備所需的遊戲幣數量</li>
+                    <li id="helpList1_2">總成本：升級所有 22 件裝備所需的總遊戲幣數量</li>
+                    <li id="helpList1_3">所需 MON：根據當前 Monad (MON) 價格計算的代幣數量</li>
+                    <li id="helpList1_4">USD 成本：換算成美元的總成本</li>
+                </ul>
+                
+                <h3 id="helpTitle2">自訂裝備成本計算器</h3>
+                <p id="helpText2">您可以輸入起始等級、目標等級和裝備數量，系統會自動計算所需的總成本。</p>
+                
+                <h3 id="helpTitle3">✨ 精華計算</h3>
+                <p id="helpText3">精華計算功能顯示從等級 1 到 9 的精華升級成本。每個等級都有對應的 MON 成本和手續費。</p>
+                
+                <h3 id="helpTitle4">自訂精華成本計算器</h3>
+                <p id="helpText4">輸入目標等級和數量，系統會計算該等級的精華成本總額。</p>
+                
+                <h3 id="helpTitle5">🎯 任務收益表</h3>
+                <p id="helpText5">顯示不同能力等級（Lv.1 到 Lv.9）對應的任務獎勵範圍。獎勵以 $LVMON 代幣計算。</p>
+                
+                <h3 id="helpTitle6">🗺️ 地圖位置</h3>
+                <p id="helpText6">查看 Lumiterra 遊戲地圖，點擊圖片可以放大查看詳細位置。</p>
+                
+                <h3 id="helpTitle7">📊 計算歷史</h3>
+                <p id="helpText7">系統會自動記錄您使用自訂計算器的計算結果，方便您查看和對比。</p>
+                
+                <h3 id="helpTitle8">🌙 暗黑模式</h3>
+                <p id="helpText8">點擊右上角的暗黑模式按鈕，可以切換到深色主題，保護您的眼睛並節省電量。</p>
+                
+                <h3 id="helpTitle9">🌐 語言切換</h3>
+                <p id="helpText9">網站支援中文和英文兩種語言，點擊語言按鈕即可切換。</p>
+                
+                <h3 id="helpTitle10">💡 提示</h3>
+                <ul>
+                    <li id="helpList10_1">價格數據來自 CoinGecko API，會自動更新</li>
+                    <li id="helpList10_2">如果無法獲取價格，可以手動輸入價格</li>
+                    <li id="helpList10_3">所有計算結果會自動保存到計算歷史中</li>
+                    <li id="helpList10_4">建議定期更新價格以獲得準確的計算結果</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- 圖片放大 Lightbox -->
         <div class="lightbox" id="lightbox" onclick="closeLightbox()">
             <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
@@ -1092,6 +1300,41 @@
                 tabEssence: '✨ 精華計算',
                 tabReward: '🎯 任務收益表',
                 tabMap: '🗺️ 地圖位置',
+                tabHistory: '📊 計算歷史',
+                tabHelp: '❓ 使用說明',
+                themeText: '暗黑模式',
+                historyTitle: '📊 計算歷史',
+                historyDescription: '查看您最近的計算記錄',
+                clearHistoryBtn: '清除歷史記錄',
+                noHistoryText: '暫無計算記錄',
+                helpMainTitle: '❓ 使用說明',
+                helpTitle1: '💰 裝備成本計算',
+                helpText1: '此功能可以計算 Lumiterra 遊戲中裝備升級所需的成本。表格顯示從等級 0 到 9 的升級成本，包括單件成本和總成本（22 件裝備）。',
+                helpList1_1: '單件成本：升級單件裝備所需的遊戲幣數量',
+                helpList1_2: '總成本：升級所有 22 件裝備所需的總遊戲幣數量',
+                helpList1_3: '所需 MON：根據當前 Monad (MON) 價格計算的代幣數量',
+                helpList1_4: 'USD 成本：換算成美元的總成本',
+                helpTitle2: '自訂裝備成本計算器',
+                helpText2: '您可以輸入起始等級、目標等級和裝備數量，系統會自動計算所需的總成本。',
+                helpTitle3: '✨ 精華計算',
+                helpText3: '精華計算功能顯示從等級 1 到 9 的精華升級成本。每個等級都有對應的 MON 成本和手續費。',
+                helpTitle4: '自訂精華成本計算器',
+                helpText4: '輸入目標等級和數量，系統會計算該等級的精華成本總額。',
+                helpTitle5: '🎯 任務收益表',
+                helpText5: '顯示不同能力等級（Lv.1 到 Lv.9）對應的任務獎勵範圍。獎勵以 $LVMON 代幣計算。',
+                helpTitle6: '🗺️ 地圖位置',
+                helpText6: '查看 Lumiterra 遊戲地圖，點擊圖片可以放大查看詳細位置。',
+                helpTitle7: '📊 計算歷史',
+                helpText7: '系統會自動記錄您使用自訂計算器的計算結果，方便您查看和對比。',
+                helpTitle8: '🌙 暗黑模式',
+                helpText8: '點擊右上角的暗黑模式按鈕，可以切換到深色主題，保護您的眼睛並節省電量。',
+                helpTitle9: '🌐 語言切換',
+                helpText9: '網站支援中文和英文兩種語言，點擊語言按鈕即可切換。',
+                helpTitle10: '💡 提示',
+                helpList10_1: '價格數據來自 CoinGecko API，會自動更新',
+                helpList10_2: '如果無法獲取價格，可以手動輸入價格',
+                helpList10_3: '所有計算結果會自動保存到計算歷史中',
+                helpList10_4: '建議定期更新價格以獲得準確的計算結果',
                 thLevel: '等級',
                 thSingleCost: '單件成本 (遊戲幣)',
                 thTotalCost: '總成本 (遊戲幣)',
@@ -1165,6 +1408,41 @@
                 tabEssence: '✨ Essence Cost',
                 tabReward: '🎯 Task Reward',
                 tabMap: '🗺️ Locations',
+                tabHistory: '📊 Calculation History',
+                tabHelp: '❓ Help',
+                themeText: 'Dark Mode',
+                historyTitle: '📊 Calculation History',
+                historyDescription: 'View your recent calculation records',
+                clearHistoryBtn: 'Clear History',
+                noHistoryText: 'No calculation records yet',
+                helpMainTitle: '❓ Help & Instructions',
+                helpTitle1: '💰 Equipment Cost Calculation',
+                helpText1: 'This feature calculates the cost required to upgrade equipment in Lumiterra. The table shows upgrade costs from level 0 to 9, including single item cost and total cost (22 items).',
+                helpList1_1: 'Single Cost: Game currency required to upgrade a single item',
+                helpList1_2: 'Total Cost: Total game currency required to upgrade all 22 items',
+                helpList1_3: 'MON Required: Token amount calculated based on current Monad (MON) price',
+                helpList1_4: 'USD Cost: Total cost converted to US dollars',
+                helpTitle2: 'Custom Equipment Cost Calculator',
+                helpText2: 'You can enter start level, target level, and equipment count, and the system will automatically calculate the total cost required.',
+                helpTitle3: '✨ Essence Cost',
+                helpText3: 'The essence cost feature displays essence upgrade costs from level 1 to 9. Each level has corresponding MON cost and fees.',
+                helpTitle4: 'Custom Essence Cost Calculator',
+                helpText4: 'Enter target level and count, and the system will calculate the total essence cost for that level.',
+                helpTitle5: '🎯 Task Reward Table',
+                helpText5: 'Displays task reward ranges corresponding to different ability levels (Lv.1 to Lv.9). Rewards are calculated in $LVMON tokens.',
+                helpTitle6: '🗺️ Map Locations',
+                helpText6: 'View the Lumiterra game map. Click on the image to zoom in and see detailed locations.',
+                helpTitle7: '📊 Calculation History',
+                helpText7: 'The system automatically records your calculation results from custom calculators for easy viewing and comparison.',
+                helpTitle8: '🌙 Dark Mode',
+                helpText8: 'Click the dark mode button in the top right corner to switch to dark theme, protecting your eyes and saving battery.',
+                helpTitle9: '🌐 Language Switch',
+                helpText9: 'The website supports both Chinese and English. Click the language button to switch.',
+                helpTitle10: '💡 Tips',
+                helpList10_1: 'Price data comes from CoinGecko API and updates automatically',
+                helpList10_2: 'If price cannot be fetched, you can manually enter the price',
+                helpList10_3: 'All calculation results are automatically saved to calculation history',
+                helpList10_4: 'It is recommended to update prices regularly for accurate calculation results',
                 thLevel: 'Level',
                 thSingleCost: 'Single Cost (Game Currency)',
                 thTotalCost: 'Total Cost (Game Currency)',
@@ -1295,11 +1573,49 @@
             if (document.getElementById('linkTitle6')) document.getElementById('linkTitle6').textContent = t.linkTitle6;
             if (document.getElementById('linkNote1')) document.getElementById('linkNote1').textContent = t.linkNote1;
             if (document.getElementById('linkNote2')) document.getElementById('linkNote2').textContent = t.linkNote2;
+            if (document.getElementById('tabHistory')) document.getElementById('tabHistory').textContent = t.tabHistory;
+            if (document.getElementById('tabHelp')) document.getElementById('tabHelp').textContent = t.tabHelp;
+            if (document.getElementById('themeText')) document.getElementById('themeText').textContent = t.themeText;
+            if (document.getElementById('historyTitle')) document.getElementById('historyTitle').textContent = t.historyTitle;
+            if (document.getElementById('historyDescription')) document.getElementById('historyDescription').textContent = t.historyDescription;
+            if (document.getElementById('clearHistoryBtn')) document.getElementById('clearHistoryBtn').textContent = t.clearHistoryBtn;
+            if (document.getElementById('noHistoryText')) document.getElementById('noHistoryText').textContent = t.noHistoryText;
+            if (document.getElementById('helpMainTitle')) document.getElementById('helpMainTitle').textContent = t.helpMainTitle;
+            if (document.getElementById('helpTitle1')) document.getElementById('helpTitle1').textContent = t.helpTitle1;
+            if (document.getElementById('helpText1')) document.getElementById('helpText1').textContent = t.helpText1;
+            if (document.getElementById('helpList1_1')) document.getElementById('helpList1_1').textContent = t.helpList1_1;
+            if (document.getElementById('helpList1_2')) document.getElementById('helpList1_2').textContent = t.helpList1_2;
+            if (document.getElementById('helpList1_3')) document.getElementById('helpList1_3').textContent = t.helpList1_3;
+            if (document.getElementById('helpList1_4')) document.getElementById('helpList1_4').textContent = t.helpList1_4;
+            if (document.getElementById('helpTitle2')) document.getElementById('helpTitle2').textContent = t.helpTitle2;
+            if (document.getElementById('helpText2')) document.getElementById('helpText2').textContent = t.helpText2;
+            if (document.getElementById('helpTitle3')) document.getElementById('helpTitle3').textContent = t.helpTitle3;
+            if (document.getElementById('helpText3')) document.getElementById('helpText3').textContent = t.helpText3;
+            if (document.getElementById('helpTitle4')) document.getElementById('helpTitle4').textContent = t.helpTitle4;
+            if (document.getElementById('helpText4')) document.getElementById('helpText4').textContent = t.helpText4;
+            if (document.getElementById('helpTitle5')) document.getElementById('helpTitle5').textContent = t.helpTitle5;
+            if (document.getElementById('helpText5')) document.getElementById('helpText5').textContent = t.helpText5;
+            if (document.getElementById('helpTitle6')) document.getElementById('helpTitle6').textContent = t.helpTitle6;
+            if (document.getElementById('helpText6')) document.getElementById('helpText6').textContent = t.helpText6;
+            if (document.getElementById('helpTitle7')) document.getElementById('helpTitle7').textContent = t.helpTitle7;
+            if (document.getElementById('helpText7')) document.getElementById('helpText7').textContent = t.helpText7;
+            if (document.getElementById('helpTitle8')) document.getElementById('helpTitle8').textContent = t.helpTitle8;
+            if (document.getElementById('helpText8')) document.getElementById('helpText8').textContent = t.helpText8;
+            if (document.getElementById('helpTitle9')) document.getElementById('helpTitle9').textContent = t.helpTitle9;
+            if (document.getElementById('helpText9')) document.getElementById('helpText9').textContent = t.helpText9;
+            if (document.getElementById('helpTitle10')) document.getElementById('helpTitle10').textContent = t.helpTitle10;
+            if (document.getElementById('helpList10_1')) document.getElementById('helpList10_1').textContent = t.helpList10_1;
+            if (document.getElementById('helpList10_2')) document.getElementById('helpList10_2').textContent = t.helpList10_2;
+            if (document.getElementById('helpList10_3')) document.getElementById('helpList10_3').textContent = t.helpList10_3;
+            if (document.getElementById('helpList10_4')) document.getElementById('helpList10_4').textContent = t.helpList10_4;
             
             // 更新狀態
             if (document.getElementById('status') && document.getElementById('status').textContent === translations['zh'].statusReady) {
                 document.getElementById('status').textContent = t.statusReady;
             }
+            
+            // 更新歷史記錄顯示
+            displayHistory();
             
             // 重新生成表格
             if (monadPrice > 0) {
@@ -1343,6 +1659,115 @@
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('active');
             document.body.style.overflow = ''; // 恢復滾動
+        }
+
+        // 暗黑模式切換
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // 更新按鈕圖標和文字
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (themeIcon && themeText) {
+                themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+                const t = translations[currentLang];
+                themeText.textContent = t.themeText;
+            }
+        }
+
+        // 初始化主題
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (themeIcon && themeText) {
+                themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+                const t = translations[currentLang];
+                themeText.textContent = t.themeText;
+            }
+        }
+
+        // 計算歷史記錄功能
+        function saveToHistory(type, data) {
+            let history = JSON.parse(localStorage.getItem('calculationHistory') || '[]');
+            
+            const historyItem = {
+                id: Date.now(),
+                type: type, // 'equipment' or 'essence'
+                data: data,
+                timestamp: new Date().toLocaleString(currentLang === 'zh' ? 'zh-TW' : 'en-US')
+            };
+            
+            history.unshift(historyItem); // 添加到開頭
+            if (history.length > 50) { // 最多保存50條
+                history = history.slice(0, 50);
+            }
+            
+            localStorage.setItem('calculationHistory', JSON.stringify(history));
+            displayHistory();
+        }
+
+        function displayHistory() {
+            const historyList = document.getElementById('historyList');
+            if (!historyList) return;
+            
+            const history = JSON.parse(localStorage.getItem('calculationHistory') || '[]');
+            const t = translations[currentLang];
+            
+            if (history.length === 0) {
+                historyList.innerHTML = `<p style="text-align: center; color: var(--text-secondary); padding: 40px;">${t.noHistoryText}</p>`;
+                return;
+            }
+            
+            historyList.innerHTML = history.map(item => {
+                let content = '';
+                if (item.type === 'equipment') {
+                    content = `
+                        <div class="history-item">
+                            <div class="history-item-header">
+                                <span>💰 ${t.calculatorTitle}</span>
+                                <span style="font-size: 12px; color: var(--text-secondary);">${item.timestamp}</span>
+                            </div>
+                            <div class="history-item-content">
+                                ${t.labelStartLevel} ${item.data.startLevel} → ${t.labelEndLevel} ${item.data.endLevel}<br>
+                                ${t.labelEquipmentCount} ${item.data.count}<br>
+                                ${t.resultLabel2} ${formatNumber(item.data.totalCost)}<br>
+                                ${t.resultLabel3} ${formatNumber(item.data.monNeeded)} MON<br>
+                                ${t.resultLabel4} $${formatPrice(item.data.usdCost)}
+                            </div>
+                        </div>
+                    `;
+                } else if (item.type === 'essence') {
+                    content = `
+                        <div class="history-item">
+                            <div class="history-item-header">
+                                <span>✨ ${t.essenceCalculatorTitle}</span>
+                                <span style="font-size: 12px; color: var(--text-secondary);">${item.timestamp}</span>
+                            </div>
+                            <div class="history-item-content">
+                                ${t.labelEssenceEndLevel} ${item.data.targetLevel}<br>
+                                ${t.labelEssenceCount} ${item.data.count}<br>
+                                ${t.essenceResultLabel2} ${formatNumber(item.data.totalCost)} MON<br>
+                                ${t.essenceResultLabel3} $${formatPrice(item.data.usdCost)}
+                            </div>
+                        </div>
+                    `;
+                }
+                return content;
+            }).join('');
+        }
+
+        function clearHistory() {
+            if (confirm(currentLang === 'zh' ? '確定要清除所有計算歷史嗎？' : 'Are you sure you want to clear all calculation history?')) {
+                localStorage.removeItem('calculationHistory');
+                displayHistory();
+            }
         }
 
         // 按 ESC 鍵關閉
@@ -1597,6 +2022,19 @@
             document.getElementById('resultValue4').textContent = formatPrice(usdCost);
 
             resultDiv.classList.add('active');
+            
+            // 保存到歷史記錄
+            if (monadPrice > 0) {
+                saveToHistory('equipment', {
+                    startLevel: startLevel,
+                    endLevel: endLevel,
+                    count: equipmentCount,
+                    singleCost: singleCost,
+                    totalCost: totalGameCost,
+                    monNeeded: monNeeded,
+                    usdCost: usdCost
+                });
+            }
         }
 
         // 自訂精華成本計算函數
@@ -1630,15 +2068,30 @@
             document.getElementById('essenceResultValue3').textContent = formatPrice(usdCost);
 
             resultDiv.classList.add('active');
+            
+            // 保存到歷史記錄
+            if (monadPrice > 0) {
+                saveToHistory('essence', {
+                    targetLevel: endLevel,
+                    count: count,
+                    singleCost: singleMonCost,
+                    totalCost: totalMonCost,
+                    usdCost: usdCost
+                });
+            }
         }
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化主題
+            initTheme();
             // 應用保存的語言設置
             applyTranslations();
             // 更新按鈕狀態
             document.getElementById('langZh').classList.toggle('active', currentLang === 'zh');
             document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
+            // 顯示歷史記錄
+            displayHistory();
             updateTable();
             fetchMonadPrice();
         });

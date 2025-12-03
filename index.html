@@ -1400,6 +1400,50 @@
                     </table>
                 </div>
             </div>
+
+            <!-- 投資回報分析計算器 -->
+            <div class="calculator-section">
+                <h3 id="roiCalculatorTitle">📊 投資回報分析計算器</h3>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="roiAbilityLevel" id="labelRoiAbilityLevel">能力等級：</label>
+                            <input type="number" id="roiAbilityLevel" min="1" max="9" value="5" placeholder="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="roiInvestment" id="labelRoiInvestment">投資金額 (USD)：</label>
+                            <input type="number" id="roiInvestment" min="0" step="0.01" value="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="roiTasksPerDay" id="labelRoiTasksPerDay">每日任務次數：</label>
+                            <input type="number" id="roiTasksPerDay" min="1" value="10" placeholder="10">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateROI()" id="roiCalcBtn">計算回報</button>
+                    </div>
+                    <div class="calculator-result" id="roiCalculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel1">單次任務平均收益：</span>
+                            <span class="result-value" id="roiResultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel2">每日收益：</span>
+                            <span class="result-value" id="roiResultValue2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel3">每月收益：</span>
+                            <span class="result-value" id="roiResultValue3">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel4">回本時間：</span>
+                            <span class="result-value" id="roiResultValue4">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel5">投資回報率 (ROI)：</span>
+                            <span class="result-value" id="roiResultValue5">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 第四頁：地圖位置 -->
@@ -1557,13 +1601,23 @@
                 mapHint: '點擊圖片可放大查看',
                 calculatorTitle: '🧮 自訂裝備成本計算器',
                 essenceCalculatorTitle: '🧮 自訂精華成本計算器',
+                roiCalculatorTitle: '📊 投資回報分析計算器',
                 labelStartLevel: '起始等級：',
                 labelEndLevel: '目標等級：',
                 labelEquipmentCount: '裝備數量：',
                 labelEssenceEndLevel: '目標等級：',
                 labelEssenceCount: '數量：',
+                labelRoiAbilityLevel: '能力等級：',
+                labelRoiInvestment: '投資金額 (MON)：',
+                labelRoiTasksPerDay: '每日任務次數：',
                 calcBtn: '計算成本',
                 essenceCalcBtn: '計算成本',
+                roiCalcBtn: '計算回報',
+                roiResultLabel1: '單次任務平均收益：',
+                roiResultLabel2: '每日收益：',
+                roiResultLabel3: '每月收益：',
+                roiResultLabel4: '回本時間：',
+                roiResultLabel5: '投資回報率 (ROI)：',
                 essenceResultLabel1: '單件成本 (MON)：',
                 essenceResultLabel2: '總成本 (MON)：',
                 essenceResultLabel3: 'USD 成本：',
@@ -1671,13 +1725,23 @@
                 mapHint: 'Click image to zoom in',
                 calculatorTitle: '🧮 Custom Equipment Cost Calculator',
                 essenceCalculatorTitle: '🧮 Custom Essence Cost Calculator',
+                roiCalculatorTitle: '📊 ROI Analysis Calculator',
                 labelStartLevel: 'Start Level:',
                 labelEndLevel: 'Target Level:',
                 labelEquipmentCount: 'Equipment Count:',
                 labelEssenceEndLevel: 'Target Level:',
                 labelEssenceCount: 'Count:',
+                labelRoiAbilityLevel: 'Ability Level:',
+                labelRoiInvestment: 'Investment Amount (MON):',
+                labelRoiTasksPerDay: 'Tasks Per Day:',
                 calcBtn: 'Calculate Cost',
                 essenceCalcBtn: 'Calculate Cost',
+                roiCalcBtn: 'Calculate ROI',
+                roiResultLabel1: 'Average Reward Per Task:',
+                roiResultLabel2: 'Daily Reward:',
+                roiResultLabel3: 'Monthly Reward:',
+                roiResultLabel4: 'Payback Time:',
+                roiResultLabel5: 'Return on Investment (ROI):',
                 essenceResultLabel1: 'Single Cost (MON):',
                 essenceResultLabel2: 'Total Cost (MON):',
                 essenceResultLabel3: 'USD Cost:',
@@ -1772,13 +1836,18 @@
             if (document.getElementById('mapHint')) document.getElementById('mapHint').textContent = t.mapHint;
             if (document.getElementById('calculatorTitle')) document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
             if (document.getElementById('essenceCalculatorTitle')) document.getElementById('essenceCalculatorTitle').textContent = t.essenceCalculatorTitle;
+            if (document.getElementById('roiCalculatorTitle')) document.getElementById('roiCalculatorTitle').textContent = t.roiCalculatorTitle;
             if (document.getElementById('labelStartLevel')) document.getElementById('labelStartLevel').textContent = t.labelStartLevel;
             if (document.getElementById('labelEndLevel')) document.getElementById('labelEndLevel').textContent = t.labelEndLevel;
             if (document.getElementById('labelEquipmentCount')) document.getElementById('labelEquipmentCount').textContent = t.labelEquipmentCount;
             if (document.getElementById('labelEssenceEndLevel')) document.getElementById('labelEssenceEndLevel').textContent = t.labelEssenceEndLevel;
             if (document.getElementById('labelEssenceCount')) document.getElementById('labelEssenceCount').textContent = t.labelEssenceCount;
+            if (document.getElementById('labelRoiAbilityLevel')) document.getElementById('labelRoiAbilityLevel').textContent = t.labelRoiAbilityLevel;
+            if (document.getElementById('labelRoiInvestment')) document.getElementById('labelRoiInvestment').textContent = t.labelRoiInvestment;
+            if (document.getElementById('labelRoiTasksPerDay')) document.getElementById('labelRoiTasksPerDay').textContent = t.labelRoiTasksPerDay;
             if (document.getElementById('calcBtn')) document.getElementById('calcBtn').textContent = t.calcBtn;
             if (document.getElementById('essenceCalcBtn')) document.getElementById('essenceCalcBtn').textContent = t.essenceCalcBtn;
+            if (document.getElementById('roiCalcBtn')) document.getElementById('roiCalcBtn').textContent = t.roiCalcBtn;
             if (document.getElementById('resultLabel1')) document.getElementById('resultLabel1').textContent = t.resultLabel1;
             if (document.getElementById('resultLabel2')) document.getElementById('resultLabel2').textContent = t.resultLabel2;
             if (document.getElementById('resultLabel3')) document.getElementById('resultLabel3').textContent = t.resultLabel3;
@@ -1786,6 +1855,11 @@
             if (document.getElementById('essenceResultLabel1')) document.getElementById('essenceResultLabel1').textContent = t.essenceResultLabel1;
             if (document.getElementById('essenceResultLabel2')) document.getElementById('essenceResultLabel2').textContent = t.essenceResultLabel2;
             if (document.getElementById('essenceResultLabel3')) document.getElementById('essenceResultLabel3').textContent = t.essenceResultLabel3;
+            if (document.getElementById('roiResultLabel1')) document.getElementById('roiResultLabel1').textContent = t.roiResultLabel1;
+            if (document.getElementById('roiResultLabel2')) document.getElementById('roiResultLabel2').textContent = t.roiResultLabel2;
+            if (document.getElementById('roiResultLabel3')) document.getElementById('roiResultLabel3').textContent = t.roiResultLabel3;
+            if (document.getElementById('roiResultLabel4')) document.getElementById('roiResultLabel4').textContent = t.roiResultLabel4;
+            if (document.getElementById('roiResultLabel5')) document.getElementById('roiResultLabel5').textContent = t.roiResultLabel5;
             if (document.getElementById('tipCombat')) document.getElementById('tipCombat').textContent = t.tipCombat;
             if (document.getElementById('tipGathering')) document.getElementById('tipGathering').textContent = t.tipGathering;
             if (document.getElementById('tipLivestock')) document.getElementById('tipLivestock').textContent = t.tipLivestock;
@@ -2017,6 +2091,20 @@
 
         // 精華等級成本（MON）
         const essenceCosts = [150, 450, 1054, 2262, 4678, 9510, 19174, 38502, 77158];
+
+        // 任務收益數據（每個等級的最小和最大收益，單位：LVMON）
+        // 格式：[最小收益, 最大收益]
+        const taskRewards = {
+            1: [4.4, 7],
+            2: [18, 27],
+            3: [46, 69],
+            4: [104, 156],
+            5: [224, 336],
+            6: [471, 707],
+            7: [982, 1474],
+            8: [2039, 3058],
+            9: [4224, 6336]
+        };
 
         let monadPrice = 0;
         let priceData = null;
@@ -2325,6 +2413,104 @@
                     usdCost: usdCost
                 });
             }
+        }
+
+        // 投資回報分析計算函數
+        function calculateROI() {
+            const abilityLevel = parseInt(document.getElementById('roiAbilityLevel').value) || 5;
+            const investment = parseFloat(document.getElementById('roiInvestment').value) || 0;
+            const tasksPerDay = parseInt(document.getElementById('roiTasksPerDay').value) || 10;
+            const resultDiv = document.getElementById('roiCalculatorResult');
+
+            // 驗證輸入
+            if (abilityLevel < 1 || abilityLevel > 9) {
+                alert(translations[currentLang].alertLevelRange19);
+                return;
+            }
+
+            if (investment <= 0) {
+                alert(translations[currentLang].alertValidPrice || '請輸入有效的投資金額');
+                return;
+            }
+
+            if (tasksPerDay < 1) {
+                alert(translations[currentLang].alertCountGreater);
+                return;
+            }
+
+            if (monadPrice <= 0) {
+                alert(translations[currentLang].getPriceFirst);
+                return;
+            }
+
+            // 將投資金額從 MON 轉換為 USD
+            const investmentUSD = investment * monadPrice;
+
+            // 獲取該等級的任務收益範圍
+            const rewardRange = taskRewards[abilityLevel];
+            if (!rewardRange) {
+                alert('無效的能力等級');
+                return;
+            }
+
+            // 計算平均收益（取最小和最大收益的平均值）
+            const avgRewardPerTask = (rewardRange[0] + rewardRange[1]) / 2;
+            
+            // 單次任務平均收益（USD）
+            const avgRewardUSD = avgRewardPerTask * monadPrice;
+            
+            // 每日收益（USD）
+            const dailyReward = avgRewardUSD * tasksPerDay;
+            
+            // 每月收益（USD，假設30天）
+            const monthlyReward = dailyReward * 30;
+            
+            // 回本時間（天）
+            const paybackDays = investmentUSD / dailyReward;
+            
+            // 投資回報率（ROI）- 計算一年的回報率
+            const yearlyReward = dailyReward * 365;
+            const roi = ((yearlyReward - investmentUSD) / investmentUSD) * 100;
+
+            // 顯示結果
+            document.getElementById('roiResultValue1').textContent = formatPrice(avgRewardUSD) + ' (' + formatNumber(avgRewardPerTask) + ' LVMON)';
+            document.getElementById('roiResultValue2').textContent = formatPrice(dailyReward);
+            document.getElementById('roiResultValue3').textContent = formatPrice(monthlyReward);
+            
+            // 格式化回本時間
+            let paybackText = '';
+            const t = translations[currentLang];
+            if (paybackDays < 1) {
+                const hours = Math.round(paybackDays * 24);
+                paybackText = currentLang === 'zh' ? hours + ' 小時' : hours + ' hours';
+            } else if (paybackDays < 30) {
+                const days = Math.round(paybackDays);
+                paybackText = currentLang === 'zh' ? days + ' 天' : days + ' days';
+            } else if (paybackDays < 365) {
+                const months = Math.round(paybackDays / 30);
+                const days = Math.round(paybackDays % 30);
+                if (currentLang === 'zh') {
+                    paybackText = months + ' 個月' + (days > 0 ? ' ' + days + ' 天' : '');
+                } else {
+                    paybackText = months + ' month' + (months > 1 ? 's' : '') + (days > 0 ? ' ' + days + ' day' + (days > 1 ? 's' : '') : '');
+                }
+            } else {
+                const years = Math.floor(paybackDays / 365);
+                const months = Math.round((paybackDays % 365) / 30);
+                if (currentLang === 'zh') {
+                    paybackText = years + ' 年' + (months > 0 ? ' ' + months + ' 個月' : '');
+                } else {
+                    paybackText = years + ' year' + (years > 1 ? 's' : '') + (months > 0 ? ' ' + months + ' month' + (months > 1 ? 's' : '') : '');
+                }
+            }
+            document.getElementById('roiResultValue4').textContent = paybackText;
+            
+            // ROI顯示
+            const roiText = roi >= 0 ? '+' + roi.toFixed(2) + '%' : roi.toFixed(2) + '%';
+            document.getElementById('roiResultValue5').textContent = roiText;
+            document.getElementById('roiResultValue5').style.color = roi >= 0 ? '#28a745' : '#dc3545';
+
+            resultDiv.classList.add('active');
         }
 
 

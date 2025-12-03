@@ -49,7 +49,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px;
             position: relative;
             color: var(--text-primary);
             transition: color 0.3s ease;
@@ -68,7 +68,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
             background: var(--bg-primary);
             backdrop-filter: blur(10px);
@@ -215,8 +215,73 @@
         }
 
         .table-container {
-            padding: 30px;
+            padding: 50px;
             overflow-x: auto;
+        }
+
+        .equipment-cost-tip {
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto 30px;
+            max-width: 800px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            font-size: 15px;
+            font-weight: 600;
+            color: #667eea;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        [data-theme="dark"] .equipment-cost-tip {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.5);
+            color: #8a9eff;
+        }
+
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .class-table-wrapper {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .class-table-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .class-table-wrapper h3 {
+            margin-bottom: 20px !important;
+            font-size: 1.2em;
+        }
+
+        .class-table-wrapper table {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .class-table-wrapper th {
+            padding: 12px 10px;
+            font-size: 13px;
+        }
+
+        .class-table-wrapper td {
+            padding: 12px 10px;
+            font-size: 13px;
+        }
+
+        .class-table-wrapper td:first-child {
+            white-space: nowrap;
+            min-width: 80px;
         }
 
         table {
@@ -420,6 +485,11 @@
             height: 100%;
             background: rgba(255, 255, 255, 0.75);
             z-index: 0;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="dark"] .reward-section::before {
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .reward-section > * {
@@ -435,6 +505,26 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
+        .reward-tip {
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            font-size: 15px;
+            font-weight: 600;
+            color: #667eea;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        [data-theme="dark"] .reward-tip {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.5);
+            color: #8a9eff;
+        }
+
         .reward-table-container {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -442,6 +532,12 @@
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        [data-theme="dark"] .reward-table-container {
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .reward-table {
@@ -466,16 +562,30 @@
             padding: 15px;
             text-align: left;
             border: 1px solid #e9ecef;
+            color: var(--text-primary);
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+        }
+
+        [data-theme="dark"] .reward-table td {
+            border-color: #444;
         }
 
         .reward-table tbody tr:nth-child(even) {
             background-color: #f8f9fa;
         }
 
+        [data-theme="dark"] .reward-table tbody tr:nth-child(even) {
+            background-color: rgba(45, 45, 45, 0.5);
+        }
+
         .reward-table tbody tr:hover {
             background-color: #e9ecef;
             transform: scale(1.01);
             transition: all 0.2s;
+        }
+
+        [data-theme="dark"] .reward-table tbody tr:hover {
+            background-color: rgba(60, 60, 60, 0.7);
         }
 
         .rank-1 td:first-child {
@@ -676,7 +786,7 @@
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -880,7 +990,26 @@
             font-style: italic;
         }
 
+        @media (max-width: 1200px) and (min-width: 769px) {
+            body {
+                padding: 30px;
+            }
+
+            .tables-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .tables-grid .class-table-wrapper:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
         @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
             .header h1 {
                 font-size: 1.8em;
             }
@@ -898,6 +1027,30 @@
             .tab-button {
                 padding: 10px 15px;
                 font-size: 14px;
+            }
+
+            .table-container {
+                padding: 20px;
+            }
+
+            .tables-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin-top: 20px;
+            }
+
+            .class-table-wrapper {
+                padding: 20px;
+            }
+
+            .class-table-wrapper h3 {
+                font-size: 1.1em;
+                margin-bottom: 15px !important;
+            }
+
+            .class-table-wrapper td:first-child {
+                white-space: nowrap;
+                min-width: 70px;
             }
 
             table {
@@ -980,28 +1133,70 @@
         <!-- 第一頁：裝備成本計算 -->
         <div class="page-content active" id="page1">
             <div class="table-container">
-                <div class="calculator-tip" id="calculatorTip" style="margin-bottom: 20px;">
-                    <span id="tipCombat">⚔️ 戰鬥:5+1</span>
-                    <span id="tipGathering">🌿 採集:5+3</span>
-                    <span id="tipLivestock">🐄 畜牧:5+3</span>
-                </div>
                 <div id="loading" class="loading" style="display: none;">
                     <div class="spinner"></div>
                     <p id="loadingText">正在載入價格數據...</p>
                 </div>
                 <div id="error" style="display: none;"></div>
-                <table id="costTable">
-                    <thead>
-                        <tr>
-                            <th id="thLevel">等級</th>
-                            <th id="thSingleCost">單件成本 (遊戲幣)</th>
-                            <th id="thTotalCost">總成本 (遊戲幣)</th>
-                            <th id="thMonNeeded">所需 MON</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    </tbody>
-                </table>
+                
+                <!-- 裝備成本提示 -->
+                <div class="equipment-cost-tip" id="equipmentCostTip">
+                    <span id="equipmentCostTipText">💡 製作裝備會有概率出時裝，此為最低成本</span>
+                </div>
+                
+                <!-- 三個職業表格容器 -->
+                <div class="tables-grid">
+                    <!-- 戰鬥職業表格 -->
+                    <div class="class-table-wrapper">
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="combatTitle">⚔️ 戰鬥職業 (6件裝備)</h3>
+                        <table id="combatTable">
+                            <thead>
+                                <tr>
+                                    <th id="thLevel">等級</th>
+                                    <th id="thSingleCost">單件成本 (遊戲幣)</th>
+                                    <th id="thTotalCost">總成本 (遊戲幣)</th>
+                                    <th id="thMonNeeded">所需 MON</th>
+                                </tr>
+                            </thead>
+                            <tbody id="combatTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 採集職業表格 -->
+                    <div class="class-table-wrapper">
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="gatheringTitle">🌿 採集職業 (8件裝備)</h3>
+                        <table id="gatheringTable">
+                            <thead>
+                                <tr>
+                                    <th id="thLevel2">等級</th>
+                                    <th id="thSingleCost2">單件成本 (遊戲幣)</th>
+                                    <th id="thTotalCost2">總成本 (遊戲幣)</th>
+                                    <th id="thMonNeeded2">所需 MON</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gatheringTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 畜牧職業表格 -->
+                    <div class="class-table-wrapper">
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="livestockTitle">🐄 畜牧職業 (8件裝備)</h3>
+                        <table id="livestockTable">
+                            <thead>
+                                <tr>
+                                    <th id="thLevel3">等級</th>
+                                    <th id="thSingleCost3">單件成本 (遊戲幣)</th>
+                                    <th id="thTotalCost3">總成本 (遊戲幣)</th>
+                                    <th id="thMonNeeded3">所需 MON</th>
+                                </tr>
+                            </thead>
+                            <tbody id="livestockTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="calculator-section">
@@ -1090,6 +1285,13 @@
                             <div class="link-note" id="linkNote2">新手礼包已经自动发到游戏内</div>
                         </div>
                     </div>
+                    <div class="link-item">
+                        <div class="link-icon">🔒</div>
+                        <div class="link-content">
+                            <div class="link-title" id="linkTitle7">質押網站 (Puzzle Stake)</div>
+                            <a href="https://puzzle.lumiterra.net/puzzle-stake" target="_blank" class="link-url">https://puzzle.lumiterra.net/puzzle-stake</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1146,6 +1348,9 @@
         <div class="page-content" id="page3">
             <div class="reward-section">
                 <h3 id="rewardTitle">🎯 單次任務收益表 (Single Token Task Reward)</h3>
+                <div class="reward-tip" id="rewardTip">
+                    <span id="rewardTipText">💡 任何職業 5+1 即可做任務</span>
+                </div>
                 <div class="reward-table-container">
                     <table class="reward-table">
                         <thead>
@@ -1346,6 +1551,8 @@
                 thRewardRange: '$LVMON 獎勵範圍',
                 linksTitle: '🔗 相關連結',
                 rewardTitle: '🎯 單次任務收益表 (Single Token Task Reward)',
+                rewardTipText: '💡 任何職業 5+1 即可做任務',
+                equipmentCostTipText: '💡 製作裝備會有概率出時裝，此為最低成本',
                 mapTitle: '🗺️ 地圖位置 (Locations)',
                 mapHint: '點擊圖片可放大查看',
                 calculatorTitle: '🧮 自訂裝備成本計算器',
@@ -1385,12 +1592,16 @@
                 tipCombat: '⚔️ 戰鬥:5+1',
                 tipGathering: '🌿 採集:5+3',
                 tipLivestock: '🐄 畜牧:5+3',
+                combatTitle: '⚔️ 戰鬥職業 (6件裝備)',
+                gatheringTitle: '🌿 採集職業 (8件裝備)',
+                livestockTitle: '🐄 畜牧職業 (8件裝備)',
                 linkTitle1: 'Lumiterra 中文游戏教程',
                 linkTitle2: '游戏网页版',
                 linkTitle3: '游戏PC安装包下载',
                 linkTitle4: '游戏充值$Mon（LVMON）代币买精力药水',
                 linkTitle5: '游戏市场',
                 linkTitle6: '邀请好友输入自己的邀请码获得奖励',
+                linkTitle7: '質押網站 (Puzzle Stake)',
                 linkNote1: 'iOS: 在 Apple Store 搜索 "Lumiterra"',
                 linkNote2: '新手礼包已经自动发到游戏内'
             },
@@ -1454,6 +1665,8 @@
                 thRewardRange: '$LVMON Reward Range',
                 linksTitle: '🔗 Related Links',
                 rewardTitle: '🎯 Single Token Task Reward',
+                rewardTipText: '💡 Any class with 5+1 equipment can do tasks',
+                equipmentCostTipText: '💡 Crafting equipment has a chance to produce costumes, this is the minimum cost',
                 mapTitle: '🗺️ Locations Map',
                 mapHint: 'Click image to zoom in',
                 calculatorTitle: '🧮 Custom Equipment Cost Calculator',
@@ -1493,12 +1706,16 @@
                 tipCombat: '⚔️ Combat:5+1',
                 tipGathering: '🌿 Gathering:5+3',
                 tipLivestock: '🐄 Livestock:5+3',
+                combatTitle: '⚔️ Combat Class (6 Equipment)',
+                gatheringTitle: '🌿 Gathering Class (8 Equipment)',
+                livestockTitle: '🐄 Livestock Class (8 Equipment)',
                 linkTitle1: 'Lumiterra Chinese Game Guide',
                 linkTitle2: 'Game Web Version',
                 linkTitle3: 'Game PC Installation Package Download',
                 linkTitle4: 'Game Recharge $Mon (LVMON) Token to Buy Energy Potions',
                 linkTitle5: 'Game Marketplace',
                 linkTitle6: 'Invite Friends to Enter Your Invite Code for Rewards',
+                linkTitle7: 'Staking Website (Puzzle Stake)',
                 linkNote1: 'iOS: Search for "Lumiterra" in the Apple Store',
                 linkNote2: 'Newcomer gift pack has been automatically sent to the game'
             }
@@ -1531,19 +1748,26 @@
             if (document.getElementById('tabReward')) document.getElementById('tabReward').textContent = t.tabReward;
             if (document.getElementById('tabMap')) document.getElementById('tabMap').textContent = t.tabMap;
             if (document.getElementById('thLevel')) document.getElementById('thLevel').textContent = t.thLevel;
+            if (document.getElementById('thLevel2')) document.getElementById('thLevel2').textContent = t.thLevel;
+            if (document.getElementById('thLevel3')) document.getElementById('thLevel3').textContent = t.thLevel;
             if (document.getElementById('thEssenceLevel')) document.getElementById('thEssenceLevel').textContent = t.thEssenceLevel;
             if (document.getElementById('thEssenceMonCost')) document.getElementById('thEssenceMonCost').textContent = t.thEssenceMonCost;
             if (document.getElementById('thEssenceFee')) document.getElementById('thEssenceFee').textContent = t.thEssenceFee;
             if (document.getElementById('thSingleCost')) document.getElementById('thSingleCost').textContent = t.thSingleCost;
+            if (document.getElementById('thSingleCost2')) document.getElementById('thSingleCost2').textContent = t.thSingleCost;
+            if (document.getElementById('thSingleCost3')) document.getElementById('thSingleCost3').textContent = t.thSingleCost;
             if (document.getElementById('thTotalCost')) document.getElementById('thTotalCost').textContent = t.thTotalCost;
+            if (document.getElementById('thTotalCost2')) document.getElementById('thTotalCost2').textContent = t.thTotalCost;
+            if (document.getElementById('thTotalCost3')) document.getElementById('thTotalCost3').textContent = t.thTotalCost;
             if (document.getElementById('thMonNeeded')) document.getElementById('thMonNeeded').textContent = t.thMonNeeded;
-            if (document.getElementById('thEssenceLevel')) document.getElementById('thEssenceLevel').textContent = t.thEssenceLevel;
-            if (document.getElementById('thEssenceMonCost')) document.getElementById('thEssenceMonCost').textContent = t.thEssenceMonCost;
-            if (document.getElementById('thEssenceFee')) document.getElementById('thEssenceFee').textContent = t.thEssenceFee;
+            if (document.getElementById('thMonNeeded2')) document.getElementById('thMonNeeded2').textContent = t.thMonNeeded;
+            if (document.getElementById('thMonNeeded3')) document.getElementById('thMonNeeded3').textContent = t.thMonNeeded;
             if (document.getElementById('thAbilityLevel')) document.getElementById('thAbilityLevel').textContent = t.thAbilityLevel;
             if (document.getElementById('thRewardRange')) document.getElementById('thRewardRange').textContent = t.thRewardRange;
             if (document.getElementById('linksTitle')) document.getElementById('linksTitle').textContent = t.linksTitle;
             if (document.getElementById('rewardTitle')) document.getElementById('rewardTitle').textContent = t.rewardTitle;
+            if (document.getElementById('rewardTipText')) document.getElementById('rewardTipText').textContent = t.rewardTipText;
+            if (document.getElementById('equipmentCostTipText')) document.getElementById('equipmentCostTipText').textContent = t.equipmentCostTipText;
             if (document.getElementById('mapTitle')) document.getElementById('mapTitle').textContent = t.mapTitle;
             if (document.getElementById('mapHint')) document.getElementById('mapHint').textContent = t.mapHint;
             if (document.getElementById('calculatorTitle')) document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
@@ -1565,12 +1789,16 @@
             if (document.getElementById('tipCombat')) document.getElementById('tipCombat').textContent = t.tipCombat;
             if (document.getElementById('tipGathering')) document.getElementById('tipGathering').textContent = t.tipGathering;
             if (document.getElementById('tipLivestock')) document.getElementById('tipLivestock').textContent = t.tipLivestock;
+            if (document.getElementById('combatTitle')) document.getElementById('combatTitle').textContent = t.combatTitle;
+            if (document.getElementById('gatheringTitle')) document.getElementById('gatheringTitle').textContent = t.gatheringTitle;
+            if (document.getElementById('livestockTitle')) document.getElementById('livestockTitle').textContent = t.livestockTitle;
             if (document.getElementById('linkTitle1')) document.getElementById('linkTitle1').textContent = t.linkTitle1;
             if (document.getElementById('linkTitle2')) document.getElementById('linkTitle2').textContent = t.linkTitle2;
             if (document.getElementById('linkTitle3')) document.getElementById('linkTitle3').textContent = t.linkTitle3;
             if (document.getElementById('linkTitle4')) document.getElementById('linkTitle4').textContent = t.linkTitle4;
             if (document.getElementById('linkTitle5')) document.getElementById('linkTitle5').textContent = t.linkTitle5;
             if (document.getElementById('linkTitle6')) document.getElementById('linkTitle6').textContent = t.linkTitle6;
+            if (document.getElementById('linkTitle7')) document.getElementById('linkTitle7').textContent = t.linkTitle7;
             if (document.getElementById('linkNote1')) document.getElementById('linkNote1').textContent = t.linkNote1;
             if (document.getElementById('linkNote2')) document.getElementById('linkNote2').textContent = t.linkNote2;
             if (document.getElementById('tabHistory')) document.getElementById('tabHistory').textContent = t.tabHistory;
@@ -1641,6 +1869,7 @@
             if (buttons[tabIndex]) {
                 buttons[tabIndex].classList.add('active');
             }
+
         }
 
         // 圖片放大功能
@@ -1780,7 +2009,11 @@
         // 裝備等級成本（遊戲幣）- 每件裝備的成本
         // 裝備等級成本（遊戲幣）- 每件裝備的成本
         const levelCosts = [300, 1200, 3000, 6600, 13800, 28200, 57000, 114600, 229800];
-        const totalEquipment = 22; // 每個等級有 22 件裝備
+        // 三個職業的裝備數量
+        const combatEquipment = 6;    // 戰鬥：5+1 = 6件
+        const gatheringEquipment = 8;  // 採集：5+3 = 8件
+        const livestockEquipment = 8;  // 畜牧：5+3 = 8件
+        const totalEquipment = 22; // 總計 22 件裝備（保留用於自訂計算器）
 
         // 精華等級成本（MON）
         const essenceCosts = [150, 450, 1054, 2262, 4678, 9510, 19174, 38502, 77158];
@@ -1889,16 +2122,29 @@
             }
         }
 
-        // 更新表格
+        // 更新表格 - 為三個職業分別生成表格
         function updateTable() {
-            const tableBody = document.getElementById('tableBody');
-            
             if (monadPrice === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #999;">${translations[currentLang].getPriceFirst}</td></tr>`;
+                const emptyMsg = `<tr><td colspan="4" style="text-align: center; padding: 40px; color: #999;">${translations[currentLang].getPriceFirst}</td></tr>`;
+                document.getElementById('combatTableBody').innerHTML = emptyMsg;
+                document.getElementById('gatheringTableBody').innerHTML = emptyMsg;
+                document.getElementById('livestockTableBody').innerHTML = emptyMsg;
                 return;
             }
 
+            // 更新戰鬥職業表格
+            updateClassTable('combatTableBody', combatEquipment);
+            // 更新採集職業表格
+            updateClassTable('gatheringTableBody', gatheringEquipment);
+            // 更新畜牧職業表格
+            updateClassTable('livestockTableBody', livestockEquipment);
+        }
+
+        // 為單個職業生成表格
+        function updateClassTable(tableBodyId, equipmentCount) {
+            const tableBody = document.getElementById(tableBodyId);
             tableBody.innerHTML = '';
+            
             let totalGameCost = 0;
             let totalUsdCost = 0;
             let totalMonNeeded = 0;
@@ -1907,7 +2153,7 @@
             levelCosts.forEach((singleCost, level) => {
                 const row = document.createElement('tr');
                 // 該等級總成本（遊戲幣）= 單件成本 × 裝備數量
-                const levelTotalGameCost = singleCost * totalEquipment;
+                const levelTotalGameCost = singleCost * equipmentCount;
                 const levelTotalUsdCost = levelTotalGameCost * monadPrice; // 該等級總成本（USD）
                 const levelMonNeeded = levelTotalGameCost; // 該等級所需 MON
 
@@ -1916,7 +2162,7 @@
                 totalMonNeeded += levelMonNeeded;
 
                 row.innerHTML = `
-                    <td style="font-weight: 600; font-size: 1.1em;">${level} ➜ ${level+1}</td>
+                    <td style="font-weight: 600; font-size: 1.1em; white-space: nowrap;">${level} ➜ ${level+1}</td>
                     <td>${formatNumber(singleCost)}</td>
                     <td style="font-weight: 600;">${formatNumber(levelTotalGameCost)}</td>
                     <td style="font-weight: 600; color: #28a745;">${formatNumber(levelMonNeeded)} MON (${formatPrice(levelTotalUsdCost)})</td>
@@ -1928,7 +2174,7 @@
             const totalRow = document.createElement('tr');
             totalRow.className = 'total-row';
             totalRow.innerHTML = `
-                <td style="font-weight: 700; font-size: 1.2em;">${translations[currentLang].total}</td>
+                <td style="font-weight: 700; font-size: 1.2em; white-space: nowrap;">${translations[currentLang].total}</td>
                 <td>-</td>
                 <td style="font-weight: 700; font-size: 1.1em;">${formatNumber(totalGameCost)}</td>
                 <td style="font-weight: 700; font-size: 1.1em; color: #28a745;">${formatNumber(totalMonNeeded)} MON (${formatPrice(totalUsdCost)})</td>
@@ -2080,6 +2326,7 @@
                 });
             }
         }
+
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {

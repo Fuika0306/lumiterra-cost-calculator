@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -2613,11 +2612,9 @@
             const avgRewardUSD = avgRewardPerTask * monadPrice;
             
             // 計算裝備碎片成本
-            // 裝備等級對應的單件成本（遊戲幣），需要從0級開始累加到該等級
-            let equipmentCost = 0;
-            for (let i = 0; i < equipmentLevel; i++) {
-                equipmentCost += levelCosts[i];
-            }
+            // levelCosts[i] 代表 (i+1) 級裝備的總成本（遊戲幣）
+            // 例如：levelCosts[2] = 3000 代表3級裝備的總成本
+            const equipmentCost = levelCosts[equipmentLevel - 1];
             
             // 一個裝備可以拆80個碎片，一個碎片可以做一次任務
             // 碎片成本 = 裝備成本 / 80（遊戲幣）

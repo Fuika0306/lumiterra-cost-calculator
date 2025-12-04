@@ -1238,6 +1238,65 @@
                 </div>
             </div>
 
+            <!-- 投資回報分析計算器（移到裝備成本計算頁） -->
+            <div class="calculator-section">
+                <h3 id="roiCalculatorTitle">📊 投資回報分析計算器</h3>
+                <div class="reward-tip" id="roiTaskLimitTip" style="max-width: 600px; margin: 0 auto 20px;">
+                    <span id="roiTaskLimitTipText">💡 每日最多做 30 個代幣任務</span>
+                </div>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="roiAbilityLevel" id="labelRoiAbilityLevel">能力等級（對應裝備等級）：</label>
+                            <input type="number" id="roiAbilityLevel" min="1" max="9" value="5" placeholder="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="roiInvestment" id="labelRoiInvestment">投資金額 (MON)：</label>
+                            <input type="number" id="roiInvestment" min="0" step="0.01" value="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="roiTasksPerDay" id="labelRoiTasksPerDay">每日任務次數：</label>
+                            <input type="number" id="roiTasksPerDay" min="1" max="30" value="10" placeholder="10">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateROI()" id="roiCalcBtn">計算回報</button>
+                    </div>
+                    <div class="calculator-result" id="roiCalculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel1">單次任務平均收益：</span>
+                            <span class="result-value" id="roiResultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel6">單次任務碎片成本：</span>
+                            <span class="result-value" id="roiResultValue6">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel7">單次任務實際利潤：</span>
+                            <span class="result-value" id="roiResultValue7">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel2">每日收益：</span>
+                            <span class="result-value" id="roiResultValue2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel8">每日實際利潤：</span>
+                            <span class="result-value" id="roiResultValue8">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel3">每月實際利潤：</span>
+                            <span class="result-value" id="roiResultValue3">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel4">回本時間：</span>
+                            <span class="result-value" id="roiResultValue4">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel5">投資回報率 (ROI)：</span>
+                            <span class="result-value" id="roiResultValue5">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="links-section">
                 <h3 id="linksTitle">🔗 相關連結</h3>
                 <div class="links-grid">
@@ -1434,65 +1493,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-
-            <!-- 投資回報分析計算器 -->
-            <div class="calculator-section">
-                <h3 id="roiCalculatorTitle">📊 投資回報分析計算器</h3>
-                <div class="reward-tip" id="roiTaskLimitTip" style="max-width: 600px; margin: 0 auto 20px;">
-                    <span id="roiTaskLimitTipText">💡 每日最多做 30 個代幣任務</span>
-                </div>
-                <div class="calculator-container">
-                    <div class="calculator-form">
-                        <div class="form-group">
-                            <label for="roiAbilityLevel" id="labelRoiAbilityLevel">能力等級（對應裝備等級）：</label>
-                            <input type="number" id="roiAbilityLevel" min="1" max="9" value="5" placeholder="5">
-                        </div>
-                        <div class="form-group">
-                            <label for="roiInvestment" id="labelRoiInvestment">投資金額 (MON)：</label>
-                            <input type="number" id="roiInvestment" min="0" step="0.01" value="0" placeholder="0">
-                        </div>
-                        <div class="form-group">
-                            <label for="roiTasksPerDay" id="labelRoiTasksPerDay">每日任務次數：</label>
-                            <input type="number" id="roiTasksPerDay" min="1" max="30" value="10" placeholder="10">
-                        </div>
-                        <button class="calculator-btn" onclick="calculateROI()" id="roiCalcBtn">計算回報</button>
-                    </div>
-                    <div class="calculator-result" id="roiCalculatorResult">
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel1">單次任務平均收益：</span>
-                            <span class="result-value" id="roiResultValue1">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel6">單次任務碎片成本：</span>
-                            <span class="result-value" id="roiResultValue6">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel7">單次任務實際利潤：</span>
-                            <span class="result-value" id="roiResultValue7">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel2">每日收益：</span>
-                            <span class="result-value" id="roiResultValue2">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel8">每日實際利潤：</span>
-                            <span class="result-value" id="roiResultValue8">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel3">每月實際利潤：</span>
-                            <span class="result-value" id="roiResultValue3">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel4">回本時間：</span>
-                            <span class="result-value" id="roiResultValue4">-</span>
-                        </div>
-                        <div class="result-item">
-                            <span class="result-label" id="roiResultLabel5">投資回報率 (ROI)：</span>
-                            <span class="result-value" id="roiResultValue5">-</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2283,8 +2283,9 @@
                 loadingEl.style.display = 'none';
                 errorEl.style.display = 'block';
                 errorEl.className = 'error';
-                errorEl.innerHTML = `<strong>錯誤：</strong> ${error.message}<br>請檢查網路連接或稍後再試。<br><br>您也可以手動輸入價格：<input type="number" id="manualPrice" placeholder="輸入 MON 價格 (USD)" step="0.000001" style="padding: 5px; margin-top: 10px; width: 200px;"><button onclick="setManualPrice()" style="padding: 5px 10px; margin-left: 5px;">設定</button>`;
-                updateStatus(translations[currentLang].statusFailed);
+                const t = translations[currentLang];
+                errorEl.innerHTML = `<strong>${t.errorTitle}</strong> ${error.message}<br>${t.errorNetwork}<br><br>${t.errorManualInput}<input type="number" id="manualPrice" placeholder="${t.manualPricePlaceholder}" step="0.000001" style="padding: 5px; margin-top: 10px; width: 200px;"><button onclick="setManualPrice()" style="padding: 5px 10px; margin-left: 5px;">${t.manualPriceSet}</button>`;
+                updateStatus(t.statusFailed);
             }
         }
 
@@ -2352,16 +2353,7 @@
                 tableBody.appendChild(row);
             });
 
-            // 添加總計行
-            const totalRow = document.createElement('tr');
-            totalRow.className = 'total-row';
-            totalRow.innerHTML = `
-                <td style="font-weight: 700; font-size: 1.2em; white-space: nowrap;">${translations[currentLang].total}</td>
-                <td>-</td>
-                <td style="font-weight: 700; font-size: 1.1em;">${formatNumber(totalGameCost)}</td>
-                <td style="font-weight: 700; font-size: 1.1em; color: #28a745;">${formatNumber(totalMonNeeded)} MON (${formatPrice(totalUsdCost)})</td>
-            `;
-            tableBody.appendChild(totalRow);
+            // 裝備成本計算：不再顯示表格底部總計列（僅顯示各等級明細）
         }
 
         // 更新精華表格
@@ -2646,7 +2638,7 @@
 
             // 顯示結果
             document.getElementById('roiResultValue1').textContent = formatPrice(avgRewardUSD) + ' (' + formatNumber(avgRewardPerTask) + ' LVMON)';
-            document.getElementById('roiResultValue6').textContent = formatPrice(fragmentCostUSD) + ' (' + formatNumber(fragmentCost) + ' 遊戲幣)';
+            document.getElementById('roiResultValue6').textContent = formatPrice(fragmentCostUSD) + ' (' + formatNumber(fragmentCost) + ' LVMON)';
             document.getElementById('roiResultValue7').textContent = formatPrice(actualProfitPerTask);
             document.getElementById('roiResultValue2').textContent = formatPrice(avgRewardUSD * tasksPerDay);
             document.getElementById('roiResultValue8').textContent = formatPrice(dailyActualProfit);

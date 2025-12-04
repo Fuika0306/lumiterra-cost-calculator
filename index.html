@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -1139,33 +1140,33 @@
                 </div>
                 <div id="error" style="display: none;"></div>
                 
-                <!-- 裝備成本提示 -->
-                <div class="equipment-cost-tip" id="equipmentCostTip">
-                    <span id="equipmentCostTipText">💡 製作裝備會有概率出時裝，此為最低成本</span>
+                <!-- 任務要求提示 -->
+                <div class="equipment-cost-tip" id="taskRequirementTip">
+                    <span id="taskRequirementTipText">💡 以下件數為完成代幣任務的最低要求</span>
                 </div>
                 
                 <!-- 三個職業表格容器 -->
                 <div class="tables-grid">
                     <!-- 戰鬥職業表格 -->
                     <div class="class-table-wrapper">
-                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="combatTitle">⚔️ 戰鬥職業 (6件裝備)</h3>
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="combatTitle">⚔️ 戰鬥職業 (6件)</h3>
                         <table id="combatTable">
-                            <thead>
-                                <tr>
-                                    <th id="thLevel">等級</th>
-                                    <th id="thSingleCost">單件成本 (遊戲幣)</th>
-                                    <th id="thTotalCost">總成本 (遊戲幣)</th>
-                                    <th id="thMonNeeded">所需 MON</th>
-                                </tr>
-                            </thead>
+                    <thead>
+                        <tr>
+                            <th id="thLevel">等級</th>
+                            <th id="thSingleCost">單件成本 (遊戲幣)</th>
+                            <th id="thTotalCost">總成本 (遊戲幣)</th>
+                            <th id="thMonNeeded">所需 MON</th>
+                        </tr>
+                    </thead>
                             <tbody id="combatTableBody">
-                            </tbody>
-                        </table>
+                    </tbody>
+                </table>
                     </div>
 
                     <!-- 採集職業表格 -->
                     <div class="class-table-wrapper">
-                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="gatheringTitle">🌿 採集職業 (8件裝備)</h3>
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="gatheringTitle">🌿 採集職業 (6件)</h3>
                         <table id="gatheringTable">
                             <thead>
                                 <tr>
@@ -1182,7 +1183,7 @@
 
                     <!-- 畜牧職業表格 -->
                     <div class="class-table-wrapper">
-                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="livestockTitle">🐄 畜牧職業 (8件裝備)</h3>
+                        <h3 style="color: #667eea; margin: 0 0 15px 0; text-align: center;" id="livestockTitle">🐄 畜牧職業 (7件)</h3>
                         <table id="livestockTable">
                             <thead>
                                 <tr>
@@ -1342,6 +1343,42 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 裝備拆解/合成計算器 -->
+            <div class="calculator-section">
+                <h3 id="dismantleCalculatorTitle">🔧 裝備拆解/合成計算器</h3>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="dismantleCurrentLevel" id="labelDismantleCurrentLevel">當前裝備等級：</label>
+                            <input type="number" id="dismantleCurrentLevel" min="1" max="8" value="3" placeholder="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="dismantleCurrentCount" id="labelDismantleCurrentCount">當前裝備數量：</label>
+                            <input type="number" id="dismantleCurrentCount" min="1" value="6" placeholder="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="dismantleTargetLevel" id="labelDismantleTargetLevel">目標裝備等級：</label>
+                            <input type="number" id="dismantleTargetLevel" min="2" max="9" value="4" placeholder="4">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateDismantle()" id="dismantleCalcBtn">計算拆解/合成</button>
+                    </div>
+                    <div class="calculator-result" id="dismantleCalculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="dismantleResultLabel1">拆解獲得碎片：</span>
+                            <span class="result-value" id="dismantleResultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="dismantleResultLabel2">可合成裝備數量：</span>
+                            <span class="result-value" id="dismantleResultValue2">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="dismantleResultLabel3">剩餘碎片：</span>
+                            <span class="result-value" id="dismantleResultValue3">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 第三頁：任務收益表 -->
@@ -1404,19 +1441,22 @@
             <!-- 投資回報分析計算器 -->
             <div class="calculator-section">
                 <h3 id="roiCalculatorTitle">📊 投資回報分析計算器</h3>
+                <div class="reward-tip" id="roiTaskLimitTip" style="max-width: 600px; margin: 0 auto 20px;">
+                    <span id="roiTaskLimitTipText">💡 每日最多做 30 個代幣任務</span>
+                </div>
                 <div class="calculator-container">
                     <div class="calculator-form">
                         <div class="form-group">
-                            <label for="roiAbilityLevel" id="labelRoiAbilityLevel">能力等級：</label>
+                            <label for="roiAbilityLevel" id="labelRoiAbilityLevel">能力等級（對應裝備等級）：</label>
                             <input type="number" id="roiAbilityLevel" min="1" max="9" value="5" placeholder="5">
                         </div>
                         <div class="form-group">
-                            <label for="roiInvestment" id="labelRoiInvestment">投資金額 (USD)：</label>
+                            <label for="roiInvestment" id="labelRoiInvestment">投資金額 (MON)：</label>
                             <input type="number" id="roiInvestment" min="0" step="0.01" value="0" placeholder="0">
                         </div>
                         <div class="form-group">
                             <label for="roiTasksPerDay" id="labelRoiTasksPerDay">每日任務次數：</label>
-                            <input type="number" id="roiTasksPerDay" min="1" value="10" placeholder="10">
+                            <input type="number" id="roiTasksPerDay" min="1" max="30" value="10" placeholder="10">
                         </div>
                         <button class="calculator-btn" onclick="calculateROI()" id="roiCalcBtn">計算回報</button>
                     </div>
@@ -1426,11 +1466,23 @@
                             <span class="result-value" id="roiResultValue1">-</span>
                         </div>
                         <div class="result-item">
+                            <span class="result-label" id="roiResultLabel6">單次任務碎片成本：</span>
+                            <span class="result-value" id="roiResultValue6">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel7">單次任務實際利潤：</span>
+                            <span class="result-value" id="roiResultValue7">-</span>
+                        </div>
+                        <div class="result-item">
                             <span class="result-label" id="roiResultLabel2">每日收益：</span>
                             <span class="result-value" id="roiResultValue2">-</span>
                         </div>
                         <div class="result-item">
-                            <span class="result-label" id="roiResultLabel3">每月收益：</span>
+                            <span class="result-label" id="roiResultLabel8">每日實際利潤：</span>
+                            <span class="result-value" id="roiResultValue8">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="roiResultLabel3">每月實際利潤：</span>
                             <span class="result-value" id="roiResultValue3">-</span>
                         </div>
                         <div class="result-item">
@@ -1601,21 +1653,35 @@
                 mapHint: '點擊圖片可放大查看',
                 calculatorTitle: '🧮 自訂裝備成本計算器',
                 essenceCalculatorTitle: '🧮 自訂精華成本計算器',
+                dismantleCalculatorTitle: '🔧 裝備拆解/合成計算器',
+                dismantleTipText: '💡 裝備可以拆解獲得碎片，碎片可以合成更高級裝備。例如：3個1級裝備拆解後可合成1個2級裝備；6件3級裝備拆解後可合成2件4級裝備。',
+                labelDismantleCurrentLevel: '當前裝備等級：',
+                labelDismantleCurrentCount: '當前裝備數量：',
+                labelDismantleTargetLevel: '目標裝備等級：',
+                dismantleCalcBtn: '計算拆解/合成',
+                dismantleResultLabel1: '拆解獲得碎片：',
+                dismantleResultLabel2: '可合成裝備數量：',
+                dismantleResultLabel3: '剩餘碎片：',
+                dismantleResultLabel4: '節省成本 (MON)：',
                 roiCalculatorTitle: '📊 投資回報分析計算器',
+                roiTaskLimitTipText: '💡 每日最多做 30 個代幣任務',
                 labelStartLevel: '起始等級：',
                 labelEndLevel: '目標等級：',
                 labelEquipmentCount: '裝備數量：',
                 labelEssenceEndLevel: '目標等級：',
                 labelEssenceCount: '數量：',
-                labelRoiAbilityLevel: '能力等級：',
+                labelRoiAbilityLevel: '能力等級（對應裝備等級）：',
                 labelRoiInvestment: '投資金額 (MON)：',
                 labelRoiTasksPerDay: '每日任務次數：',
                 calcBtn: '計算成本',
                 essenceCalcBtn: '計算成本',
                 roiCalcBtn: '計算回報',
                 roiResultLabel1: '單次任務平均收益：',
+                roiResultLabel6: '單次任務碎片成本：',
+                roiResultLabel7: '單次任務實際利潤：',
                 roiResultLabel2: '每日收益：',
-                roiResultLabel3: '每月收益：',
+                roiResultLabel8: '每日實際利潤：',
+                roiResultLabel3: '每月實際利潤：',
                 roiResultLabel4: '回本時間：',
                 roiResultLabel5: '投資回報率 (ROI)：',
                 essenceResultLabel1: '單件成本 (MON)：',
@@ -1646,9 +1712,10 @@
                 tipCombat: '⚔️ 戰鬥:5+1',
                 tipGathering: '🌿 採集:5+3',
                 tipLivestock: '🐄 畜牧:5+3',
-                combatTitle: '⚔️ 戰鬥職業 (6件裝備)',
-                gatheringTitle: '🌿 採集職業 (8件裝備)',
-                livestockTitle: '🐄 畜牧職業 (8件裝備)',
+                combatTitle: '⚔️ 戰鬥職業 (6件)',
+                gatheringTitle: '🌿 採集職業 (6件)',
+                livestockTitle: '🐄 畜牧職業 (7件)',
+                taskRequirementTipText: '💡 以下件數為完成代幣任務的最低要求',
                 linkTitle1: 'Lumiterra 中文游戏教程',
                 linkTitle2: '游戏网页版',
                 linkTitle3: '游戏PC安装包下载',
@@ -1725,21 +1792,35 @@
                 mapHint: 'Click image to zoom in',
                 calculatorTitle: '🧮 Custom Equipment Cost Calculator',
                 essenceCalculatorTitle: '🧮 Custom Essence Cost Calculator',
+                dismantleCalculatorTitle: '🔧 Equipment Dismantle/Synthesis Calculator',
+                dismantleTipText: '💡 Equipment can be dismantled to obtain fragments, fragments can be synthesized into higher-level equipment. Example: 3 Level 1 equipment dismantled can synthesize 1 Level 2 equipment; 6 Level 3 equipment dismantled can synthesize 2 Level 4 equipment.',
+                labelDismantleCurrentLevel: 'Current Equipment Level:',
+                labelDismantleCurrentCount: 'Current Equipment Count:',
+                labelDismantleTargetLevel: 'Target Equipment Level:',
+                dismantleCalcBtn: 'Calculate Dismantle/Synthesis',
+                dismantleResultLabel1: 'Fragments from Dismantling:',
+                dismantleResultLabel2: 'Synthesizable Equipment Count:',
+                dismantleResultLabel3: 'Remaining Fragments:',
+                dismantleResultLabel4: 'Cost Saved (MON):',
                 roiCalculatorTitle: '📊 ROI Analysis Calculator',
+                roiTaskLimitTipText: '💡 Maximum 30 token tasks per day',
                 labelStartLevel: 'Start Level:',
                 labelEndLevel: 'Target Level:',
                 labelEquipmentCount: 'Equipment Count:',
                 labelEssenceEndLevel: 'Target Level:',
                 labelEssenceCount: 'Count:',
-                labelRoiAbilityLevel: 'Ability Level:',
+                labelRoiAbilityLevel: 'Ability Level (Corresponds to Equipment Level):',
                 labelRoiInvestment: 'Investment Amount (MON):',
                 labelRoiTasksPerDay: 'Tasks Per Day:',
                 calcBtn: 'Calculate Cost',
                 essenceCalcBtn: 'Calculate Cost',
                 roiCalcBtn: 'Calculate ROI',
                 roiResultLabel1: 'Average Reward Per Task:',
+                roiResultLabel6: 'Fragment Cost Per Task:',
+                roiResultLabel7: 'Actual Profit Per Task:',
                 roiResultLabel2: 'Daily Reward:',
-                roiResultLabel3: 'Monthly Reward:',
+                roiResultLabel8: 'Daily Actual Profit:',
+                roiResultLabel3: 'Monthly Actual Profit:',
                 roiResultLabel4: 'Payback Time:',
                 roiResultLabel5: 'Return on Investment (ROI):',
                 essenceResultLabel1: 'Single Cost (MON):',
@@ -1770,9 +1851,10 @@
                 tipCombat: '⚔️ Combat:5+1',
                 tipGathering: '🌿 Gathering:5+3',
                 tipLivestock: '🐄 Livestock:5+3',
-                combatTitle: '⚔️ Combat Class (6 Equipment)',
-                gatheringTitle: '🌿 Gathering Class (8 Equipment)',
-                livestockTitle: '🐄 Livestock Class (8 Equipment)',
+                combatTitle: '⚔️ Combat Class (6 pieces)',
+                gatheringTitle: '🌿 Gathering Class (6 pieces)',
+                livestockTitle: '🐄 Livestock Class (7 pieces)',
+                taskRequirementTipText: '💡 The following number of items is the minimum requirement to complete token tasks',
                 linkTitle1: 'Lumiterra Chinese Game Guide',
                 linkTitle2: 'Game Web Version',
                 linkTitle3: 'Game PC Installation Package Download',
@@ -1832,21 +1914,28 @@
             if (document.getElementById('rewardTitle')) document.getElementById('rewardTitle').textContent = t.rewardTitle;
             if (document.getElementById('rewardTipText')) document.getElementById('rewardTipText').textContent = t.rewardTipText;
             if (document.getElementById('equipmentCostTipText')) document.getElementById('equipmentCostTipText').textContent = t.equipmentCostTipText;
+            if (document.getElementById('taskRequirementTipText')) document.getElementById('taskRequirementTipText').textContent = t.taskRequirementTipText;
             if (document.getElementById('mapTitle')) document.getElementById('mapTitle').textContent = t.mapTitle;
             if (document.getElementById('mapHint')) document.getElementById('mapHint').textContent = t.mapHint;
             if (document.getElementById('calculatorTitle')) document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
             if (document.getElementById('essenceCalculatorTitle')) document.getElementById('essenceCalculatorTitle').textContent = t.essenceCalculatorTitle;
+            if (document.getElementById('dismantleCalculatorTitle')) document.getElementById('dismantleCalculatorTitle').textContent = t.dismantleCalculatorTitle;
             if (document.getElementById('roiCalculatorTitle')) document.getElementById('roiCalculatorTitle').textContent = t.roiCalculatorTitle;
+            if (document.getElementById('roiTaskLimitTipText')) document.getElementById('roiTaskLimitTipText').textContent = t.roiTaskLimitTipText;
             if (document.getElementById('labelStartLevel')) document.getElementById('labelStartLevel').textContent = t.labelStartLevel;
             if (document.getElementById('labelEndLevel')) document.getElementById('labelEndLevel').textContent = t.labelEndLevel;
             if (document.getElementById('labelEquipmentCount')) document.getElementById('labelEquipmentCount').textContent = t.labelEquipmentCount;
             if (document.getElementById('labelEssenceEndLevel')) document.getElementById('labelEssenceEndLevel').textContent = t.labelEssenceEndLevel;
             if (document.getElementById('labelEssenceCount')) document.getElementById('labelEssenceCount').textContent = t.labelEssenceCount;
+            if (document.getElementById('labelDismantleCurrentLevel')) document.getElementById('labelDismantleCurrentLevel').textContent = t.labelDismantleCurrentLevel;
+            if (document.getElementById('labelDismantleCurrentCount')) document.getElementById('labelDismantleCurrentCount').textContent = t.labelDismantleCurrentCount;
+            if (document.getElementById('labelDismantleTargetLevel')) document.getElementById('labelDismantleTargetLevel').textContent = t.labelDismantleTargetLevel;
             if (document.getElementById('labelRoiAbilityLevel')) document.getElementById('labelRoiAbilityLevel').textContent = t.labelRoiAbilityLevel;
             if (document.getElementById('labelRoiInvestment')) document.getElementById('labelRoiInvestment').textContent = t.labelRoiInvestment;
             if (document.getElementById('labelRoiTasksPerDay')) document.getElementById('labelRoiTasksPerDay').textContent = t.labelRoiTasksPerDay;
             if (document.getElementById('calcBtn')) document.getElementById('calcBtn').textContent = t.calcBtn;
             if (document.getElementById('essenceCalcBtn')) document.getElementById('essenceCalcBtn').textContent = t.essenceCalcBtn;
+            if (document.getElementById('dismantleCalcBtn')) document.getElementById('dismantleCalcBtn').textContent = t.dismantleCalcBtn;
             if (document.getElementById('roiCalcBtn')) document.getElementById('roiCalcBtn').textContent = t.roiCalcBtn;
             if (document.getElementById('resultLabel1')) document.getElementById('resultLabel1').textContent = t.resultLabel1;
             if (document.getElementById('resultLabel2')) document.getElementById('resultLabel2').textContent = t.resultLabel2;
@@ -1855,8 +1944,14 @@
             if (document.getElementById('essenceResultLabel1')) document.getElementById('essenceResultLabel1').textContent = t.essenceResultLabel1;
             if (document.getElementById('essenceResultLabel2')) document.getElementById('essenceResultLabel2').textContent = t.essenceResultLabel2;
             if (document.getElementById('essenceResultLabel3')) document.getElementById('essenceResultLabel3').textContent = t.essenceResultLabel3;
+            if (document.getElementById('dismantleResultLabel1')) document.getElementById('dismantleResultLabel1').textContent = t.dismantleResultLabel1;
+            if (document.getElementById('dismantleResultLabel2')) document.getElementById('dismantleResultLabel2').textContent = t.dismantleResultLabel2;
+            if (document.getElementById('dismantleResultLabel3')) document.getElementById('dismantleResultLabel3').textContent = t.dismantleResultLabel3;
             if (document.getElementById('roiResultLabel1')) document.getElementById('roiResultLabel1').textContent = t.roiResultLabel1;
+            if (document.getElementById('roiResultLabel6')) document.getElementById('roiResultLabel6').textContent = t.roiResultLabel6;
+            if (document.getElementById('roiResultLabel7')) document.getElementById('roiResultLabel7').textContent = t.roiResultLabel7;
             if (document.getElementById('roiResultLabel2')) document.getElementById('roiResultLabel2').textContent = t.roiResultLabel2;
+            if (document.getElementById('roiResultLabel8')) document.getElementById('roiResultLabel8').textContent = t.roiResultLabel8;
             if (document.getElementById('roiResultLabel3')) document.getElementById('roiResultLabel3').textContent = t.roiResultLabel3;
             if (document.getElementById('roiResultLabel4')) document.getElementById('roiResultLabel4').textContent = t.roiResultLabel4;
             if (document.getElementById('roiResultLabel5')) document.getElementById('roiResultLabel5').textContent = t.roiResultLabel5;
@@ -2083,10 +2178,10 @@
         // 裝備等級成本（遊戲幣）- 每件裝備的成本
         // 裝備等級成本（遊戲幣）- 每件裝備的成本
         const levelCosts = [300, 1200, 3000, 6600, 13800, 28200, 57000, 114600, 229800];
-        // 三個職業的裝備數量
-        const combatEquipment = 6;    // 戰鬥：5+1 = 6件
-        const gatheringEquipment = 8;  // 採集：5+3 = 8件
-        const livestockEquipment = 8;  // 畜牧：5+3 = 8件
+        // 三個職業的裝備數量（完成任務所需件數）
+        const combatEquipment = 6;    // 戰鬥：需要6件
+        const gatheringEquipment = 6;  // 採集：需要6件（總共8件）
+        const livestockEquipment = 7;  // 畜牧：需要7件（總共8件）
         const totalEquipment = 22; // 總計 22 件裝備（保留用於自訂計算器）
 
         // 精華等級成本（MON）
@@ -2250,7 +2345,7 @@
                 totalMonNeeded += levelMonNeeded;
 
                 row.innerHTML = `
-                    <td style="font-weight: 600; font-size: 1.1em; white-space: nowrap;">${level} ➜ ${level+1}</td>
+                    <td style="font-weight: 600; font-size: 1.1em; white-space: nowrap;">${level+1}</td>
                     <td>${formatNumber(singleCost)}</td>
                     <td style="font-weight: 600;">${formatNumber(levelTotalGameCost)}</td>
                     <td style="font-weight: 600; color: #28a745;">${formatNumber(levelMonNeeded)} MON (${formatPrice(levelTotalUsdCost)})</td>
@@ -2415,9 +2510,67 @@
             }
         }
 
+        // 裝備拆解/合成計算函數
+        function calculateDismantle() {
+            const currentLevel = parseInt(document.getElementById('dismantleCurrentLevel').value) || 3;
+            const currentCount = parseInt(document.getElementById('dismantleCurrentCount').value) || 6;
+            const targetLevel = parseInt(document.getElementById('dismantleTargetLevel').value) || 4;
+            const resultDiv = document.getElementById('dismantleCalculatorResult');
+
+            // 驗證輸入
+            if (currentLevel < 1 || currentLevel > 8) {
+                alert(translations[currentLang].alertLevelRange08 || '等級範圍為 1-8');
+                return;
+            }
+
+            if (targetLevel < 2 || targetLevel > 9) {
+                alert(translations[currentLang].alertLevelRange19 || '目標等級範圍為 2-9');
+                return;
+            }
+
+            if (targetLevel <= currentLevel) {
+                alert(currentLang === 'zh' ? '目標等級必須大於當前等級' : 'Target level must be greater than current level');
+                return;
+            }
+
+            if (currentCount < 1) {
+                alert(translations[currentLang].alertCountGreater);
+                return;
+            }
+
+            if (monadPrice <= 0) {
+                alert(translations[currentLang].getPriceFirst);
+                return;
+            }
+
+            // 計算拆解獲得的碎片總數
+            // 一個裝備可以拆80個碎片
+            const totalFragments = currentCount * 80;
+
+            // 計算合成目標等級裝備需要的碎片數量
+            // 根據規則：3個N級裝備 → 1個(N+1)級裝備
+            // 所以1個(N+1)級裝備需要3個N級裝備 = 3 * 80 = 240個碎片
+            const fragmentsPerTargetEquipment = 240; // 3個裝備 * 80碎片 = 240碎片
+
+            // 計算可以合成多少個目標等級裝備
+            const canSynthesize = Math.floor(totalFragments / fragmentsPerTargetEquipment);
+
+            // 計算剩餘碎片
+            const remainingFragments = totalFragments % fragmentsPerTargetEquipment;
+
+            // 顯示結果
+            document.getElementById('dismantleResultValue1').textContent = formatNumber(totalFragments) + ' 碎片';
+            document.getElementById('dismantleResultValue2').textContent = canSynthesize + ' 件';
+            document.getElementById('dismantleResultValue3').textContent = formatNumber(remainingFragments) + ' 碎片';
+
+            resultDiv.classList.add('active');
+        }
+
         // 投資回報分析計算函數
         function calculateROI() {
             const abilityLevel = parseInt(document.getElementById('roiAbilityLevel').value) || 5;
+            // 裝備等級等於能力等級
+            const equipmentLevel = abilityLevel;
             const investment = parseFloat(document.getElementById('roiInvestment').value) || 0;
             const tasksPerDay = parseInt(document.getElementById('roiTasksPerDay').value) || 10;
             const resultDiv = document.getElementById('roiCalculatorResult');
@@ -2433,8 +2586,8 @@
                 return;
             }
 
-            if (tasksPerDay < 1) {
-                alert(translations[currentLang].alertCountGreater);
+            if (tasksPerDay < 1 || tasksPerDay > 30) {
+                alert(currentLang === 'zh' ? '每日任務次數範圍為 1-30' : 'Daily tasks range is 1-30');
                 return;
             }
 
@@ -2459,28 +2612,55 @@
             // 單次任務平均收益（USD）
             const avgRewardUSD = avgRewardPerTask * monadPrice;
             
-            // 每日收益（USD）
-            const dailyReward = avgRewardUSD * tasksPerDay;
+            // 計算裝備碎片成本
+            // 裝備等級對應的單件成本（遊戲幣），需要從0級開始累加到該等級
+            let equipmentCost = 0;
+            for (let i = 0; i < equipmentLevel; i++) {
+                equipmentCost += levelCosts[i];
+            }
             
-            // 每月收益（USD，假設30天）
-            const monthlyReward = dailyReward * 30;
+            // 一個裝備可以拆80個碎片，一個碎片可以做一次任務
+            // 碎片成本 = 裝備成本 / 80（遊戲幣）
+            const fragmentCost = equipmentCost / 80;
+            // 碎片成本（USD）
+            const fragmentCostUSD = fragmentCost * monadPrice;
             
-            // 回本時間（天）
-            const paybackDays = investmentUSD / dailyReward;
+            // 單次任務實際利潤（USD）= 任務收益 - 碎片成本
+            const actualProfitPerTask = avgRewardUSD - fragmentCostUSD;
             
-            // 投資回報率（ROI）- 計算一年的回報率
-            const yearlyReward = dailyReward * 365;
-            const roi = ((yearlyReward - investmentUSD) / investmentUSD) * 100;
+            // 每日實際利潤（USD）
+            const dailyActualProfit = actualProfitPerTask * tasksPerDay;
+            
+            // 檢查是否有利潤
+            if (dailyActualProfit <= 0) {
+                alert(currentLang === 'zh' ? '警告：碎片成本高於任務收益，無法獲利！' : 'Warning: Fragment cost exceeds task reward, cannot profit!');
+                // 仍然顯示結果，但標記為負數
+            }
+            
+            // 每月實際利潤（USD，假設30天）
+            const monthlyActualProfit = dailyActualProfit * 30;
+            
+            // 回本時間（天）- 基於實際利潤計算
+            const paybackDays = dailyActualProfit > 0 ? investmentUSD / dailyActualProfit : Infinity;
+            
+            // 投資回報率（ROI）- 計算一年的回報率（基於實際利潤）
+            const yearlyActualProfit = dailyActualProfit * 365;
+            const roi = ((yearlyActualProfit - investmentUSD) / investmentUSD) * 100;
 
             // 顯示結果
             document.getElementById('roiResultValue1').textContent = formatPrice(avgRewardUSD) + ' (' + formatNumber(avgRewardPerTask) + ' LVMON)';
-            document.getElementById('roiResultValue2').textContent = formatPrice(dailyReward);
-            document.getElementById('roiResultValue3').textContent = formatPrice(monthlyReward);
+            document.getElementById('roiResultValue6').textContent = formatPrice(fragmentCostUSD) + ' (' + formatNumber(fragmentCost) + ' 遊戲幣)';
+            document.getElementById('roiResultValue7').textContent = formatPrice(actualProfitPerTask);
+            document.getElementById('roiResultValue2').textContent = formatPrice(avgRewardUSD * tasksPerDay);
+            document.getElementById('roiResultValue8').textContent = formatPrice(dailyActualProfit);
+            document.getElementById('roiResultValue3').textContent = formatPrice(monthlyActualProfit);
             
             // 格式化回本時間
             let paybackText = '';
             const t = translations[currentLang];
-            if (paybackDays < 1) {
+            if (!isFinite(paybackDays) || paybackDays <= 0) {
+                paybackText = currentLang === 'zh' ? '無法回本' : 'Cannot break even';
+            } else if (paybackDays < 1) {
                 const hours = Math.round(paybackDays * 24);
                 paybackText = currentLang === 'zh' ? hours + ' 小時' : hours + ' hours';
             } else if (paybackDays < 30) {

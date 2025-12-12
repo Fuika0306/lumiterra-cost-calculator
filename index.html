@@ -1125,9 +1125,10 @@
             <button class="tab-button active" onclick="switchTab(0)" id="tabCost">💰 裝備成本計算</button>
             <button class="tab-button" onclick="switchTab(1)" id="tabEssence">✨ 精華計算</button>
             <button class="tab-button" onclick="switchTab(2)" id="tabReward">🎯 任務收益表</button>
-            <button class="tab-button" onclick="switchTab(3)" id="tabMap">🗺️ 地圖位置</button>
-            <button class="tab-button" onclick="switchTab(4)" id="tabHistory">📊 計算歷史</button>
-            <button class="tab-button" onclick="switchTab(5)" id="tabHelp">❓ 使用說明</button>
+            <button class="tab-button" onclick="switchTab(3)" id="tabCostume">👗 時裝計算</button>
+            <button class="tab-button" onclick="switchTab(4)" id="tabMap">🗺️ 地圖位置</button>
+            <button class="tab-button" onclick="switchTab(5)" id="tabHistory">📊 計算歷史</button>
+            <button class="tab-button" onclick="switchTab(6)" id="tabHelp">❓ 使用說明</button>
         </div>
 
         <!-- 第一頁：裝備成本計算 -->
@@ -1497,7 +1498,37 @@
             </div>
         </div>
 
-        <!-- 第四頁：地圖位置 -->
+        <!-- 第四頁：時裝計算 -->
+        <div class="page-content" id="page4">
+            <div class="calculator-section">
+                <h3 id="costumeCalculatorTitle">👗 時裝計算器</h3>
+                <div class="calculator-container">
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="costumeLevel" id="labelCostumeLevel">目標時裝等級：</label>
+                            <input type="number" id="costumeLevel" min="1" max="9" value="1" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="costumeCount" id="labelCostumeCount">時裝數量：</label>
+                            <input type="number" id="costumeCount" min="1" value="1" placeholder="1">
+                        </div>
+                        <button class="calculator-btn" onclick="calculateCostume()" id="costumeCalcBtn">計算成本</button>
+                    </div>
+                    <div class="calculator-result" id="costumeCalculatorResult">
+                        <div class="result-item">
+                            <span class="result-label" id="costumeResultLabel1">所需碎片總數：</span>
+                            <span class="result-value" id="costumeResultValue1">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label" id="costumeResultLabel2">各等級碎片明細：</span>
+                            <span class="result-value" id="costumeResultValue2">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第五頁：地圖位置 -->
         <div class="page-content" id="page4">
             <div class="map-section">
                 <h3 id="mapTitle">🗺️ 地圖位置 (Locations)</h3>
@@ -1599,6 +1630,7 @@
                 tabCost: '💰 裝備成本計算',
                 tabEssence: '✨ 精華計算',
                 tabReward: '🎯 任務收益表',
+                tabCostume: '👗 時裝計算',
                 tabMap: '🗺️ 地圖位置',
                 tabHistory: '📊 計算歷史',
                 tabHelp: '❓ 使用說明',
@@ -1662,6 +1694,13 @@
                 dismantleResultLabel2: '可合成裝備數量：',
                 dismantleResultLabel3: '剩餘碎片：',
                 dismantleResultLabel4: '節省成本 (MON)：',
+                costumeCalculatorTitle: '👗 時裝計算器',
+                costumeTipText: '💡 合成規則：LV1精華=15個LV1碎片；LV2精華=1個LV1精華+15個LV2碎片；LV3精華=1個LV2精華+15個LV3碎片；以此類推。時裝需要：LV1時裝=2個LV1精華；LV2時裝=2個LV2精華+2個LV1精華；以此類推。碎片轉換：1個LV N碎片 = 3^(N-1)個LV1碎片',
+                labelCostumeLevel: '目標時裝等級：',
+                labelCostumeCount: '時裝數量：',
+                costumeCalcBtn: '計算成本',
+                costumeResultLabel1: '所需LV1碎片總數：',
+                costumeResultLabel2: '精華明細：',
                 roiCalculatorTitle: '📊 投資回報分析計算器',
                 roiTaskLimitTipText: '💡 每日最多做 30 個代幣任務',
                 labelStartLevel: '起始等級：',
@@ -1738,6 +1777,7 @@
                 tabCost: '💰 Equipment Cost',
                 tabEssence: '✨ Essence Cost',
                 tabReward: '🎯 Task Reward',
+                tabCostume: '👗 Costume Calculator',
                 tabMap: '🗺️ Locations',
                 tabHistory: '📊 Calculation History',
                 tabHelp: '❓ Help',
@@ -1801,6 +1841,13 @@
                 dismantleResultLabel2: 'Synthesizable Equipment Count:',
                 dismantleResultLabel3: 'Remaining Fragments:',
                 dismantleResultLabel4: 'Cost Saved (MON):',
+                costumeCalculatorTitle: '👗 Costume Calculator',
+                costumeTipText: '💡 Synthesis Rules: LV1 essence = 15 LV1 fragments; LV2 essence = 1 LV1 essence + 15 LV2 fragments; LV3 essence = 1 LV2 essence + 15 LV3 fragments; and so on. Costume requires: LV1 costume = 2 LV1 essences; LV2 costume = 2 LV2 essences + 2 LV1 essences; and so on. Fragment Conversion: 1 LV N fragment = 3^(N-1) LV1 fragments',
+                labelCostumeLevel: 'Target Costume Level:',
+                labelCostumeCount: 'Costume Count:',
+                costumeCalcBtn: 'Calculate Cost',
+                costumeResultLabel1: 'Total LV1 Fragments Required:',
+                costumeResultLabel2: 'Essence Details:',
                 roiCalculatorTitle: '📊 ROI Analysis Calculator',
                 roiTaskLimitTipText: '💡 Maximum 30 token tasks per day',
                 labelStartLevel: 'Start Level:',
@@ -1891,6 +1938,7 @@
             if (document.getElementById('tabCost')) document.getElementById('tabCost').textContent = t.tabCost;
             if (document.getElementById('tabEssence')) document.getElementById('tabEssence').textContent = t.tabEssence;
             if (document.getElementById('tabReward')) document.getElementById('tabReward').textContent = t.tabReward;
+            if (document.getElementById('tabCostume')) document.getElementById('tabCostume').textContent = t.tabCostume;
             if (document.getElementById('tabMap')) document.getElementById('tabMap').textContent = t.tabMap;
             if (document.getElementById('thLevel')) document.getElementById('thLevel').textContent = t.thLevel;
             if (document.getElementById('thLevel2')) document.getElementById('thLevel2').textContent = t.thLevel;
@@ -1919,6 +1967,12 @@
             if (document.getElementById('calculatorTitle')) document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
             if (document.getElementById('essenceCalculatorTitle')) document.getElementById('essenceCalculatorTitle').textContent = t.essenceCalculatorTitle;
             if (document.getElementById('dismantleCalculatorTitle')) document.getElementById('dismantleCalculatorTitle').textContent = t.dismantleCalculatorTitle;
+            if (document.getElementById('costumeCalculatorTitle')) document.getElementById('costumeCalculatorTitle').textContent = t.costumeCalculatorTitle;
+            if (document.getElementById('labelCostumeLevel')) document.getElementById('labelCostumeLevel').textContent = t.labelCostumeLevel;
+            if (document.getElementById('labelCostumeCount')) document.getElementById('labelCostumeCount').textContent = t.labelCostumeCount;
+            if (document.getElementById('costumeCalcBtn')) document.getElementById('costumeCalcBtn').textContent = t.costumeCalcBtn;
+            if (document.getElementById('costumeResultLabel1')) document.getElementById('costumeResultLabel1').textContent = t.costumeResultLabel1;
+            if (document.getElementById('costumeResultLabel2')) document.getElementById('costumeResultLabel2').textContent = t.costumeResultLabel2;
             if (document.getElementById('roiCalculatorTitle')) document.getElementById('roiCalculatorTitle').textContent = t.roiCalculatorTitle;
             if (document.getElementById('roiTaskLimitTipText')) document.getElementById('roiTaskLimitTipText').textContent = t.roiTaskLimitTipText;
             if (document.getElementById('labelStartLevel')) document.getElementById('labelStartLevel').textContent = t.labelStartLevel;
@@ -2678,6 +2732,120 @@
             const roiText = roi >= 0 ? '+' + roi.toFixed(2) + '%' : roi.toFixed(2) + '%';
             document.getElementById('roiResultValue5').textContent = roiText;
             document.getElementById('roiResultValue5').style.color = roi >= 0 ? '#28a745' : '#dc3545';
+
+            resultDiv.classList.add('active');
+        }
+
+        // 時裝計算函數
+        function calculateCostume() {
+            const targetLevel = parseInt(document.getElementById('costumeLevel').value) || 1;
+            const count = parseInt(document.getElementById('costumeCount').value) || 1;
+            const resultDiv = document.getElementById('costumeCalculatorResult');
+
+            // 驗證輸入
+            if (targetLevel < 1 || targetLevel > 9) {
+                alert(translations[currentLang].alertLevelRange19);
+                return;
+            }
+
+            if (count < 1) {
+                alert(translations[currentLang].alertCountGreater);
+                return;
+            }
+
+            // 計算所需碎片
+            // 新規則：
+            // LV1精華 = 15個LV1碎片
+            // LV2精華 = 1個LV1精華 + 15個LV2碎片 = 15個LV1碎片 + 15×3 = 15 + 45 = 60個LV1碎片
+            // LV3精華 = 1個LV2精華 + 15個LV3碎片 = 60 + 15×9 = 60 + 135 = 195個LV1碎片
+            // ...
+            // LV N精華 = 1個LV(N-1)精華 + 15個LV N碎片
+            // 
+            // 時裝需要：
+            // LV1時裝 = 2個LV1精華
+            // LV2時裝 = 2個LV2精華 + 2個LV1精華
+            // LV N時裝 = 2個LV N精華 + 2個LV(N-1)精華（只需要最高兩級）
+            // 碎片轉換規則：1個LV N碎片 = 3^(N-1)個LV1碎片
+            
+            const fragmentsPerEssence = 15; // 每個精華需要15個該等級碎片
+            const essencesPerCostume = 2; // 每個時裝需要2個該等級精華
+            
+            // 計算每個等級精華所需的LV1碎片數量
+            // essenceLv1Cost[N] = 該等級精華所需的LV1碎片總數
+            const essenceLv1Cost = {}; // {level: lv1FragmentCount}
+            essenceLv1Cost[1] = 15; // LV1精華 = 15個LV1碎片
+            
+            // 計算LV2到targetLevel的精華成本
+            for (let level = 2; level <= targetLevel; level++) {
+                // LV N精華 = 1個LV(N-1)精華 + 15個LV N碎片
+                const lowerEssenceCost = essenceLv1Cost[level - 1]; // 低一級精華的LV1碎片成本
+                const currentFragmentCost = fragmentsPerEssence * Math.pow(3, level - 1); // 15個LV N碎片 = 15 × 3^(N-1)個LV1碎片
+                essenceLv1Cost[level] = lowerEssenceCost + currentFragmentCost;
+            }
+            
+            // 計算時裝所需各等級精華的數量
+            const essenceRequirements = {}; // {level: count} 各等級精華需要的數量
+            let totalLv1Fragments = 0;
+            const synthesisSteps = {}; // 合成步驟 {level: step}
+            
+            // 時裝只需要目標等級和目標等級-1的精華（如果目標等級>1）
+            // LV1時裝只需要LV1精華，LV2及以上需要目標等級和目標等級-1的精華
+            const minLevel = targetLevel === 1 ? 1 : targetLevel - 1;
+            for (let level = targetLevel; level >= minLevel; level--) {
+                const essencesNeeded = essencesPerCostume * count;
+                essenceRequirements[level] = essencesNeeded;
+                
+                // 該等級精華需要的LV1碎片總數
+                const lv1CostForThisLevel = essenceLv1Cost[level] * essencesNeeded;
+                totalLv1Fragments += lv1CostForThisLevel;
+                
+                // 計算該等級需要直接收集的碎片數量
+                const directFragmentsNeeded = essencesNeeded * fragmentsPerEssence;
+                
+                // 記錄合成步驟
+                if (level === 1) {
+                    // LV1精華只需要碎片
+                    synthesisSteps[level] = {
+                        fragmentsNeeded: directFragmentsNeeded,
+                        essencesResult: essencesNeeded,
+                        lv1Cost: lv1CostForThisLevel
+                    };
+                } else {
+                    // 高級精華需要低級精華+碎片
+                    const lowerEssencesNeeded = essencesNeeded; // 需要相同數量的低一級精華
+                    synthesisSteps[level] = {
+                        fragmentsNeeded: directFragmentsNeeded,
+                        lowerEssencesNeeded: lowerEssencesNeeded,
+                        essencesResult: essencesNeeded,
+                        lv1Cost: lv1CostForThisLevel
+                    };
+                }
+            }
+
+            // 顯示結果
+            const t = translations[currentLang];
+            const fragmentUnit = currentLang === 'zh' ? ' LV1碎片' : ' LV1 Fragments';
+            document.getElementById('costumeResultValue1').textContent = formatNumber(totalLv1Fragments) + fragmentUnit;
+            
+            // 顯示精華明細（直接顯示需要的精華數量和對應的LV1碎片）
+            let detailText = '';
+            const essenceText = currentLang === 'zh' ? '精華' : ' Essence';
+            const piecesText = currentLang === 'zh' ? '個' : ' pieces';
+            const fragmentUnitText = currentLang === 'zh' ? '個 LV1碎片' : ' LV1 Fragments';
+            
+            // 只顯示時裝需要的等級（從最低到最高）
+            for (let level = minLevel; level <= targetLevel; level++) {
+                const step = synthesisSteps[level];
+                if (!step) continue;
+                
+                if (detailText) detailText += '<br>';
+                
+                // 格式：LV2精華 × 8個 (120個 LV1碎片)
+                const lv1FragmentsPerEssence = essenceLv1Cost[level]; // 每個精華需要的LV1碎片
+                detailText += `<strong>LV${level}${essenceText}</strong> × ${formatNumber(step.essencesResult)}${piecesText} <span style="color: #666;">(${formatNumber(lv1FragmentsPerEssence * step.essencesResult)}${fragmentUnitText})</span>`;
+            }
+            
+            document.getElementById('costumeResultValue2').innerHTML = detailText;
 
             resultDiv.classList.add('active');
         }
